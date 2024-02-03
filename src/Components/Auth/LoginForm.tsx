@@ -1,13 +1,11 @@
 import {
   Box,
   TextField,
-  Button,
   FormControl,
   InputLabel,
   OutlinedInput,
   IconButton,
   InputAdornment,
-  Link,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
@@ -64,7 +62,6 @@ function LoginForm() {
           label="Password"
         />
       </FormControl>
-      <Link href="/reset-password">Forgot password?</Link>
 
       <LoadingButton
         variant="contained"
