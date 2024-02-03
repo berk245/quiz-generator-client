@@ -6,8 +6,9 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import AuthView from "./Views/Auth";
+import LoginView from "./Views/Auth/LoginView";
 import Dashboard from "./Views/Dashboard";
+import SignupView from "./Views/Auth/SignupView";
 
 const ProtectedRoute = () => {
   const user = "";
@@ -21,10 +22,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AuthView />} />
+        <Route path="/" element={<LoginView />} />
+        <Route path="/signup" element={<SignupView />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/*" element={<AuthView />} />
+          <Route path="/*" element={<LoginView />} />
         </Route>
       </Routes>
     </Router>
