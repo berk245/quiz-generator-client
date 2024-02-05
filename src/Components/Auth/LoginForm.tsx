@@ -10,22 +10,16 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-
+import { useLoginUser } from "../../Helpers/http";
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fetchingData, setFetchingData] = useState(false);
-  const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    setFetchingData(true);
-    console.log(email, password);
-    setTimeout(() => {
-      setFetchingData(false);
-      navigate("/dashboard");
-    }, 5000);
+  const { mutate: loginUser, data, isPending, isError, error, isSuccess  } = useLoginUser();
+
+  const handleSubmit = () => {
+    loginUser({ email: email, password: password });
   };
 
   return (
@@ -65,7 +59,7 @@ function LoginForm() {
 
       <LoadingButton
         variant="contained"
-        loading={fetchingData}
+        loading={isPending}
         onClick={handleSubmit}
       >
         Login
