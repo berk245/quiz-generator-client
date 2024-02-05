@@ -9,7 +9,7 @@ function SignupView() {
     <SignupForm />
     <div className="auth-form-link-container">
       <span>Already have an account?</span>
-      <Link href="/signup">Login</Link>
+      <Link href="/login">Login</Link>
     </div>
   </div>
   )
