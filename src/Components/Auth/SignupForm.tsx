@@ -11,28 +11,21 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useSignupUser } from "../../Api/auth";
 
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const [fetchingData, setFetchingData] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const { mutate: signupUser, data, isPending, isError, error, isSuccess  } = useSignupUser();
+
+
   const handleSubmit = async () => {
-    try {
-      setFetchingData(true);
-      console.log(email, password);
-      setTimeout(() => {
-        setFetchingData(false);
-        alert("Signup successful. Redirecting you to login page.");
-        navigate("/");
-      }, 5000);
-    } catch (err) {
-      setErrorMessage("Something went wrong. Please try again.");
-    }
+    // To-do: Validate input either here or in the signup function
+    signupUser({email, password})
   };
 
   const isValidEmail = (email: string) => {
@@ -43,6 +36,9 @@ function SignupForm() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+
+  console.log(error);
+
 
   return (
     <Box
@@ -84,7 +80,7 @@ function SignupForm() {
           Repeat Password
         </InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
+          id="outlined-adornment-password-repeat"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPasswordRepeat(e.target.value)}
           error={password !== passwordRepeat}
@@ -103,15 +99,15 @@ function SignupForm() {
           label="Password"
         />
       </FormControl>
-      {errorMessage && (
+      {isError && (
         <div className="auth-form-error-message">
-          <span>{errorMessage}</span>
+          <span>{error.message}</span>
         </div>
       )}
 
       <LoadingButton
         variant="contained"
-        loading={fetchingData}
+        loading={isPending}
         onClick={handleSubmit}
       >
         Sign up
