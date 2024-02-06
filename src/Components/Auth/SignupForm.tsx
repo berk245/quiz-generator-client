@@ -11,7 +11,7 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useSignupUser } from "../../Helpers/http";
+import { useSignupUser } from "../../Api/auth";
 
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
