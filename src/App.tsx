@@ -10,11 +10,18 @@ import LoginView from "./Views/Auth/LoginView";
 import Dashboard from "./Views/Dashboard";
 import SignupView from "./Views/Auth/SignupView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { getCookie } from "./Api/helpers";
 
 const ProtectedRoute = () => {
-  const user = "";
-  if (!user) {
+  if (!getCookie("auth_token")) {
     return <Navigate to="/" replace />;
+  }
+  return <Outlet />;
+};
+
+const PublicRoute = () => {
+  if (getCookie("auth_token")) {
+    return <Navigate to="/dashboard" replace />;
   }
   return <Outlet />;
 };
@@ -26,12 +33,20 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginView />} />
-          <Route path="/signup" element={<SignupView />} />
+
+          <Route element={<PublicRoute />}>
+            <Route path="/" element={<LoginView />} />
+            <Route path="/login" element={<LoginView />} />
+            <Route path="/signup" element={<SignupView />} />
+          </Route>
+
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/*" element={<LoginView />} />
           </Route>
+
+          <Route path="/*" element={<><p>Not found</p></>} />
+
+
         </Routes>
       </Router>
     </QueryClientProvider>
