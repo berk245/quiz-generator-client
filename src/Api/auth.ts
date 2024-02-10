@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { setCookie } from "./helpers";
+import Cookies from "js-cookie";
 
 interface LoginFunctionInterface {
   email: string;
@@ -20,7 +20,11 @@ export const useLoginUser = () => {
     mutationKey: ["login"],
     mutationFn: LoginFunction,
     onSuccess: (res) => {
-      setCookie('auth_token', res.user_token)
+      const cookieOptions: Cookies.CookiesStatic["attributes"] = {
+        secure: true,
+        sameSite: "strict",
+      }
+      Cookies.set('auth_token', res.user_token, cookieOptions)
       window.location.replace('/dashboard')
     },
   });
