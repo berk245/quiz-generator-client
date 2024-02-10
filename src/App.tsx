@@ -12,17 +12,15 @@ import Dashboard from "./Views/Dashboard";
 import SignupView from "./Views/Auth/SignupView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const isUserSignedIn = Cookies.get("auth_token") ? true : false;
+
 const ProtectedRoute = () => {
-  if (!Cookies.get("auth_token")) {
-    return <Navigate to="/" replace />;
-  }
+  if (!isUserSignedIn) return <Navigate to="/" replace />;
   return <Outlet />;
 };
 
 const PublicRoute = () => {
-  if (Cookies.get("auth_token")) {
-    return <Navigate to="/dashboard" replace />;
-  }
+  if (isUserSignedIn) return <Navigate to="/dashboard" replace />;
   return <Outlet />;
 };
 
