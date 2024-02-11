@@ -1,9 +1,7 @@
-import React from 'react'
+import DefaultLayout from "../../Layouts/DefaultLayout";
 
 function QuizDetailsView() {
-  return (
-    <div>QuizDetailsView</div>
-  )
+  return <DefaultLayout>QuizDetailsView</DefaultLayout>;
 }
 
-export default QuizDetailsView
+export default QuizDetailsView;

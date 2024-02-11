@@ -1,8 +1,7 @@
+import DefaultLayout from "../../Layouts/DefaultLayout";
 
 function Dashboard() {
-  return (
-    <div>Dashboard View</div>
-  )
+  return <DefaultLayout>Dashboard View</DefaultLayout>;
 }
 
-export default Dashboard
+export default Dashboard;
