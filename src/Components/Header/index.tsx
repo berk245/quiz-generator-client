@@ -10,8 +10,7 @@ function Header() {
       dir="row"
       className="header-container flex-items-center flex-justify-space-between"
     >
-      <Flex dir="row" className="header-left-section">
-        <div className="page-logo">Logo</div>
+      <Flex dir="row" className="header-left-section flex-items-center">
         <HeaderNavbar />
       </Flex>
 
