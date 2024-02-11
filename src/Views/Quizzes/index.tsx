@@ -1,7 +1,7 @@
-import React from "react";
+import DefaultLayout from "../../Layouts/DefaultLayout";
 
 function QuizzesView() {
-  return <div>QuizzesView</div>;
+  return <DefaultLayout>QuizzesView</DefaultLayout>;
 }
 
 export default QuizzesView;

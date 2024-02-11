@@ -23,9 +23,9 @@ export const useLoginUser = () => {
       const cookieOptions: Cookies.CookiesStatic["attributes"] = {
         secure: true,
         sameSite: "strict",
-      }
-      Cookies.set('auth_token', res.user_token, cookieOptions)
-      window.location.replace('/dashboard')
+      };
+      Cookies.set("auth_token", res.user_token, cookieOptions);
+      window.location.replace("/dashboard");
     },
   });
 };
@@ -49,3 +49,7 @@ export const useSignupUser = () => {
   });
 };
 
+export const SignOut = () => {
+  Cookies.remove("auth_token");
+  window.location.replace("/");
+};
