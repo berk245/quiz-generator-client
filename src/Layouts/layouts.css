@@ -1,0 +1,12 @@
+.layout-default {
+  display: grid;
+  grid-template-rows: 4rem auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.view-content-container {
+  max-height: 100%;
+  overflow: auto;
+  padding: 1rem;
+}
