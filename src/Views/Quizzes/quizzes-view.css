@@ -1,0 +1,23 @@
+.quizzes-view-title-container {
+  gap: 1.5rem;
+}
+
+.quizzes-view-main-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.quizzes-view-title-line {
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.quizzes-view-subtitle {
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+}
+
+.quizzes-view-add-new-button {
+  padding: 2rem;
+  text-transform: none !important;
+}
