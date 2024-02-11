@@ -10,6 +10,9 @@ import Cookies from "js-cookie";
 import LoginView from "./Views/Auth/LoginView";
 import Dashboard from "./Views/Dashboard";
 import SignupView from "./Views/Auth/SignupView";
+import QuizzesView from "./Views/Quizzes";
+import QuizDetailsView from "./Views/QuizDetails";
+import CreateQuizView from "./Views/CreateQuiz";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const isUserSignedIn = Cookies.get("auth_token") ? true : false;
@@ -39,6 +42,7 @@ function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/quizzes/*" element={<QuizzesRoutes />} />
           </Route>
 
           <Route
@@ -54,5 +58,13 @@ function App() {
     </QueryClientProvider>
   );
 }
+
+const QuizzesRoutes = () => (
+  <Routes>
+    <Route index element={<QuizzesView />} />
+    <Route path="/new" element={<CreateQuizView />} />
+    <Route path="/:quiz_id" element={<QuizDetailsView />} />
+  </Routes>
+);
 
 export default App;
