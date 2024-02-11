@@ -22,12 +22,17 @@ function LoginForm() {
     loginUser({ email: email, password: password });
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if(e.key === 'Enter') loginUser({ email: email, password: password });
+  }
+
   return (
     <Box
       component="form"
       className="auth-form-box"
       noValidate
       autoComplete="off"
+      onKeyDown={handleKeyDown}
     >
       <TextField
         id="outlined-basic"

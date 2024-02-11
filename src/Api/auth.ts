@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 
 interface LoginFunctionInterface {
   email: string;
@@ -19,11 +20,12 @@ export const useLoginUser = () => {
     mutationKey: ["login"],
     mutationFn: LoginFunction,
     onSuccess: (res) => {
-      console.log(res);
-      // To-do: Handle cookie/JWT setting
-      // To-do: Handle redirect to dashboard
-
-      // window.location.replace('/signup')
+      const cookieOptions: Cookies.CookiesStatic["attributes"] = {
+        secure: true,
+        sameSite: "strict",
+      }
+      Cookies.set('auth_token', res.user_token, cookieOptions)
+      window.location.replace('/dashboard')
     },
   });
 };
@@ -46,3 +48,4 @@ export const useSignupUser = () => {
     },
   });
 };
+
