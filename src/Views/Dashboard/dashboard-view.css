@@ -1,0 +1,15 @@
+.dashboard-view-container {
+  gap: 2rem;
+}
+.dashboard-view-quick-links {
+  flex-basis: 25%;
+  gap: 1rem;
+}
+
+.dashboard-quick-link button {
+  width: 100%;
+}
+
+.dashboard-view-stats-section {
+  flex-basis: 75%;
+}
