@@ -1,3 +1,6 @@
+.quizzes-view-container {
+  gap: 2rem;
+}
 .quizzes-view-title-container {
   gap: 1.5rem;
 }
@@ -18,11 +21,18 @@
 }
 
 .quizzes-view-add-new-button {
-  padding: 2rem;
   text-transform: none !important;
+}
+
+.quizzes-view-content-section {
+  gap: 1rem;
 }
 
 .search-sort-line {
   width: 100%;
-  padding: 1rem 0;
+  gap: 0.5rem;
+}
+
+.quiz-boxes-container {
+  gap: 1rem;
 }

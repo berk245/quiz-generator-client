@@ -1,0 +1,44 @@
+/* quiz-box.css */
+
+.quiz-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  gap: 1rem;
+}
+
+.quiz-box-link {
+  text-decoration: none;
+
+  &:visited {
+    color: initial;
+  }
+}
+
+.quiz-box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-box .quiz-box-text {
+  gap: 0.5rem;
+}
+
+.quiz-box h4 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.quiz-box-description {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.quiz-box svg {
+  font-size: 3rem;
+  fill: #3498db; /* Change the color as needed */
+}
+
+/* You can adjust these styles based on your design preferences */

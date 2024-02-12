@@ -33,7 +33,7 @@ export default function SearchInput({
   };
 
   return (
-    <Box sx={{ "& > :not(style)": { m: 1 } }} className={className}>
+    <Box sx={{ "& > :not(style)": { m: 0 } }} className={className}>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <TextField
           id="input-with-sx"

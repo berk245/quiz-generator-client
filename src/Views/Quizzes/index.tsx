@@ -6,6 +6,7 @@ import { AddCircleOutline } from "@mui/icons-material";
 import { useState } from "react";
 import SearchInput from "../../Ui/SearchInput";
 import { SortBySelector } from "../../Components/Quizzes/SortBySelector";
+import SingleQuizBox from "../../Components/Quizzes/SingleQuizBox";
 
 function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (ascending)");
@@ -19,6 +20,23 @@ function QuizzesView() {
     setSearchTerm(searchTerm);
   };
 
+  const fakeQuizzes = [
+    {
+      id: "123456",
+      quiz_title: "Test Quiz",
+      quiz_description: "Description of the test quiz",
+      created_at: new Date(),
+      is_active: true,
+    },
+    {
+      id: "1234",
+      quiz_title: "Test Quiz2",
+      quiz_description: "Description of the test quiz",
+      created_at: new Date(),
+      is_active: true,
+    },
+  ];
+
   return (
     <DefaultLayout>
       <Flex className="quizzes-view-container" dir="column">
@@ -29,7 +47,8 @@ function QuizzesView() {
               className="quizzes-view-add-new-button"
               variant="contained"
               startIcon={<AddCircleOutline />}
-              size="small"
+              size="medium"
+              color="secondary"
             >
               Create a New Quiz
             </Button>
@@ -43,24 +62,27 @@ function QuizzesView() {
             blanditiis earum velit quo totam.
           </span>
         </Flex>
-      </Flex>
+        <Flex className="quizzes-view-content-section" dir="column">
+          <Flex className="search-sort-line flex-items-center" dir="row">
+            <SearchInput
+              labelText="Search Quizzes"
+              onValueChange={handleSearch}
+              variant="outlined"
+              size="small"
+              className="quiz-search-input"
+            ></SearchInput>
+            <SortBySelector
+              sortValue={sortBy}
+              handleSortChange={handleSortChange}
+            />
+          </Flex>
 
-      <Flex className="search-sort-line flex-items-center" dir="row">
-        <SearchInput
-          labelText="Search Quizzes"
-          onValueChange={handleSearch}
-          variant="outlined"
-          size="small"
-        ></SearchInput>
-        <SortBySelector
-          sortValue={sortBy}
-          handleSortChange={handleSortChange}
-        />
-      </Flex>
-
-      {/* Box Links */}
-      <Flex className="quiz-boxes-container" dir="row">
-        <div className="quiz-box">Quiz Box</div>
+          <Flex className="quiz-boxes-container" dir="row">
+            {fakeQuizzes.map((quiz) => {
+              return <SingleQuizBox key={quiz.id} quiz={quiz} />;
+            })}
+          </Flex>
+        </Flex>
       </Flex>
     </DefaultLayout>
   );
