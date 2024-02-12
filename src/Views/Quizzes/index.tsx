@@ -1,10 +1,24 @@
-import { Button } from "@mui/material";
+import { Button, SelectChangeEvent } from "@mui/material";
 import DefaultLayout from "../../Layouts/DefaultLayout";
 import Flex from "../../Ui/Flex";
-
 import "./quizzes-view.css";
 import { AddCircleOutline } from "@mui/icons-material";
+import { useState } from "react";
+import SearchInput from "../../Ui/SearchInput";
+import { SortBySelector } from "../../Components/Quizzes/SortBySelector";
+
 function QuizzesView() {
+  const [sortBy, setSortBy] = useState("Date (ascending)");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSortChange = (e: SelectChangeEvent) => {
+    setSortBy(e.target.value);
+  };
+
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+  };
+
   return (
     <DefaultLayout>
       <Flex className="quizzes-view-container" dir="column">
@@ -31,11 +45,23 @@ function QuizzesView() {
         </Flex>
       </Flex>
 
-      {/* Title with Add new Quiz Button and Subtitle*/}
+      <Flex className="search-sort-line flex-items-center" dir="row">
+        <SearchInput
+          labelText="Search Quizzes"
+          onValueChange={handleSearch}
+          variant="outlined"
+          size="small"
+        ></SearchInput>
+        <SortBySelector
+          sortValue={sortBy}
+          handleSortChange={handleSortChange}
+        />
+      </Flex>
 
-      {/* Quizzes Boxes */}
-      {/* Search and Sort Bar */}
       {/* Box Links */}
+      <Flex className="quiz-boxes-container" dir="row">
+        <div className="quiz-box">Quiz Box</div>
+      </Flex>
     </DefaultLayout>
   );
 }

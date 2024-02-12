@@ -21,3 +21,8 @@
   padding: 2rem;
   text-transform: none !important;
 }
+
+.search-sort-line {
+  width: 100%;
+  padding: 1rem 0;
+}
