@@ -30,8 +30,8 @@ export const SortBySelector = ({
       >
         <MenuItem value="Date (ascending)">Date (ascending)</MenuItem>
         <MenuItem value={"Date (descending)"}>Date (descending)</MenuItem>
-        <MenuItem value={"Name (a -z)"}>Name (a-z)</MenuItem>
-        <MenuItem value={"Name (z -a)"}>Name (z-a)</MenuItem>
+        <MenuItem value={"Name (a-z)"}>Name (a-z)</MenuItem>
+        <MenuItem value={"Name (z-a)"}>Name (z-a)</MenuItem>
       </Select>
     </FormControl>
   );

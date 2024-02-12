@@ -1,11 +1,11 @@
 import { CalculateOutlined } from "@mui/icons-material";
 import Flex from "../../../Ui/Flex";
-import { Quiz } from "../../../types";
+import { QuizType } from "../../../types";
 import "./quiz-box.css";
 import { Link } from "react-router-dom";
 
 interface SingleQuizBoxProps {
-  quiz: Quiz;
+  quiz: QuizType;
 }
 
 function SingleQuizBox({ quiz }: SingleQuizBoxProps) {

@@ -1,4 +1,4 @@
-export interface Quiz {
+export interface QuizType {
   id: string;
   quiz_title: string;
   quiz_description: string;

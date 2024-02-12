@@ -7,10 +7,31 @@ import { useState } from "react";
 import SearchInput from "../../Ui/SearchInput";
 import { SortBySelector } from "../../Components/Quizzes/SortBySelector";
 import SingleQuizBox from "../../Components/Quizzes/SingleQuizBox";
+import { QuizType } from "../../types";
+const fakeQuizzes = [
+  {
+    id: "123456",
+    quiz_title: "Clean Code Quiz 3",
+    quiz_description: "Module description based set of questions",
+    created_at: new Date(),
+    is_active: true,
+  },
+  {
+    id: "1234",
+    quiz_title: "Collab test",
+    quiz_description: "Some trial and error experiment",
+    created_at: new Date(),
+    is_active: true,
+  },
+];
 
 function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (ascending)");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredQuizzes = fakeQuizzes
+    .filter(searchFilter(searchTerm))
+    .sort(sortFilter(sortBy));
 
   const handleSortChange = (e: SelectChangeEvent) => {
     setSortBy(e.target.value);
@@ -19,23 +40,6 @@ function QuizzesView() {
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
-
-  const fakeQuizzes = [
-    {
-      id: "123456",
-      quiz_title: "Test Quiz",
-      quiz_description: "Description of the test quiz",
-      created_at: new Date(),
-      is_active: true,
-    },
-    {
-      id: "1234",
-      quiz_title: "Test Quiz2",
-      quiz_description: "Description of the test quiz",
-      created_at: new Date(),
-      is_active: true,
-    },
-  ];
 
   return (
     <DefaultLayout>
@@ -78,7 +82,7 @@ function QuizzesView() {
           </Flex>
 
           <Flex className="quiz-boxes-container" dir="row">
-            {fakeQuizzes.map((quiz) => {
+            {filteredQuizzes.map((quiz) => {
               return <SingleQuizBox key={quiz.id} quiz={quiz} />;
             })}
           </Flex>
@@ -89,3 +93,33 @@ function QuizzesView() {
 }
 
 export default QuizzesView;
+
+// Search filter function
+const searchFilter = (term: string) => (quiz: QuizType) => {
+  return (
+    quiz.quiz_title.toLowerCase().includes(term.toLowerCase()) ||
+    quiz.quiz_description.toLowerCase().includes(term.toLowerCase())
+  );
+};
+
+// Sort filter function
+const sortFilter = (sortBy: string) => (quizA: QuizType, quizB: QuizType) => {
+  console.log(sortBy);
+  if (sortBy === "Date (ascending)") {
+    return (
+      new Date(quizA.created_at).getTime() -
+      new Date(quizB.created_at).getTime()
+    );
+  } else if (sortBy === "Date (descending)") {
+    return (
+      new Date(quizB.created_at).getTime() -
+      new Date(quizA.created_at).getTime()
+    );
+  } else if (sortBy === "Name (a-z)") {
+    return quizA.quiz_title.localeCompare(quizB.quiz_title);
+  } else if (sortBy === "Name (z-a)") {
+    return quizB.quiz_title.localeCompare(quizA.quiz_title);
+  }
+  // Add more conditions for other sorting options if needed
+  return 0;
+};
