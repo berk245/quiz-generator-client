@@ -52,7 +52,7 @@ function QuizzesView() {
               variant="contained"
               startIcon={<AddCircleOutline />}
               size="medium"
-              color="secondary"
+              color="error"
             >
               Create a New Quiz
             </Button>
@@ -81,11 +81,11 @@ function QuizzesView() {
             />
           </Flex>
 
-          <Flex className="quiz-boxes-container" dir="row">
+          <div className="quiz-boxes-container" dir="row">
             {filteredQuizzes.map((quiz) => {
               return <SingleQuizBox key={quiz.id} quiz={quiz} />;
             })}
-          </Flex>
+          </div>
         </Flex>
       </Flex>
     </DefaultLayout>
