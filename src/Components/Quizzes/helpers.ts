@@ -1,5 +1,5 @@
 import { QuizType } from "../../types";
-// Search filter function
+
 export const searchFilter = (term: string) => (quiz: QuizType) => {
   return (
     quiz.quiz_title.toLowerCase().includes(term.toLowerCase()) ||
@@ -7,7 +7,6 @@ export const searchFilter = (term: string) => (quiz: QuizType) => {
   );
 };
 
-// Sort filter function
 export const sortFilter =
   (sortBy: string) => (quizA: QuizType, quizB: QuizType) => {
     if (sortBy === "Date (ascending)") {
