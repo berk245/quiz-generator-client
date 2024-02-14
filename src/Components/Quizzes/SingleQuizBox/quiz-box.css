@@ -1,0 +1,44 @@
+.quiz-box {
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
+
+  &:visited {
+    color: initial;
+  }
+}
+
+.quiz-box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-box-title-line {
+  gap: 0.5rem;
+}
+
+.quiz-box-title-line svg {
+  font-size: 1.25rem;
+  fill: #3498db;
+}
+
+.quiz-box .quiz-box-text {
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.quiz-box h4 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.quiz-box-description {
+  color: #666;
+  font-size: 0.8rem;
+}

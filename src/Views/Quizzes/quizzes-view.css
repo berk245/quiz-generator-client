@@ -1,0 +1,40 @@
+.quizzes-view-container {
+  gap: 2rem;
+}
+.quizzes-view-title-container {
+  gap: 1.5rem;
+}
+
+.quizzes-view-main-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.quizzes-view-title-line {
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.quizzes-view-subtitle {
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+}
+
+.quizzes-view-add-new-button {
+  text-transform: none !important;
+}
+
+.quizzes-view-content-section {
+  gap: 1rem;
+}
+
+.search-sort-line {
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.quiz-boxes-container {
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
