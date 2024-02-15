@@ -13,36 +13,12 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import DefaultLayout from "../../Layouts/DefaultLayout";
 import CreateQuizForm from "../../Components/CreateQuiz/CreateQuizForm";
-
-// import AddressForm from './AddressForm';
-// import PaymentForm from './PaymentForm';
-// import Review from './Review';
-
-const steps = ["Quiz Info", "Sources", "Keywords & Concepts", "Meta-prompts"];
+import { useAtom } from "jotai";
+import { activeStepAtom, stepNamesAtom, newQuizDataAtom } from "./atoms";
 
 export default function CreateQuiz() {
-  const [activeStep, setActiveStep] = useState(0);
-
-  const [formData, setFormData] = useState({
-    quizName: "",
-    description: "",
-    keywords: [],
-    concepts: [],
-    metaPrompts: "",
-    files: [] as File[], // An array to store multiple files
-  });
-
-  const handleInputChange = (
-    field: string,
-    value: string | File[] | string[]
-  ) => {
-    setFormData((prevData) => ({ ...prevData, [field]: value }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files || [];
-    handleInputChange("files", Array.from(files));
-  };
+  const [activeStep, setActiveStep] = useAtom(activeStepAtom);
+  const [stepNames] = useAtom(stepNamesAtom);
 
   return (
     <DefaultLayout>
@@ -55,18 +31,13 @@ export default function CreateQuiz() {
           sx={{ my: { xs: 3, md: 4 }, p: { xs: 2, md: 3 } }}
         >
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
+            {stepNames.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
-          <CreateQuizForm
-            activeStep={activeStep}
-            setActiveStep={setActiveStep}
-            handleInputChange={handleInputChange}
-            handleFileChange={handleFileChange}
-          />
+          <CreateQuizForm />
         </Paper>
       </Container>
     </DefaultLayout>

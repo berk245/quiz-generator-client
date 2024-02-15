@@ -3,29 +3,15 @@ import Typography from "@mui/material/Typography";
 import FormActions from "./FormActions";
 import QuizInfoForm from "./QuizInfoForm";
 import { Grid } from "@mui/material";
+import { useAtom } from "jotai";
+import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
+export default function CreateQuizForm() {
+  const [activeStep, setActiveStep] = useAtom(activeStepAtom);
 
-interface CreateQuizFormProps {
-  activeStep: number;
-  setActiveStep: React.Dispatch<React.SetStateAction<number>>;
-  handleInputChange: (field: string, value: string | File[] | string[]) => void;
-  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export default function CreateQuizForm({
-  activeStep,
-  setActiveStep,
-  handleInputChange,
-  handleFileChange,
-}: CreateQuizFormProps) {
   function getStepContent(step: number) {
     switch (step) {
       case 0:
-        return (
-          <QuizInfoForm
-            handleInputChange={handleInputChange}
-            handleFileChange={handleFileChange}
-          />
-        );
+        return <QuizInfoForm />;
       case 1:
         return <></>;
       case 2:
