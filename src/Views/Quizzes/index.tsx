@@ -10,6 +10,7 @@ import SingleQuizBox from "../../Components/Quizzes/SingleQuizBox";
 import { QuizType } from "../../types";
 import { useGetQuizzes } from "../../Api/quizzes";
 import { searchFilter, sortFilter } from "../../Components/Quizzes/helpers";
+import { Link } from "react-router-dom";
 
 function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (ascending)");
@@ -37,15 +38,17 @@ function QuizzesView() {
         <Flex className="quizzes-view-title-container" dir="column">
           <Flex className="quizzes-view-title-line flex-items-center" dir="row">
             <span className="quizzes-view-main-title">Your Quizzes</span>
-            <Button
-              className="quizzes-view-add-new-button"
-              variant="contained"
-              startIcon={<AddCircleOutline />}
-              size="medium"
-              color="error"
-            >
-              Create a New Quiz
-            </Button>
+            <Link to="/quizzes/new">
+              <Button
+                className="quizzes-view-add-new-button"
+                variant="contained"
+                startIcon={<AddCircleOutline />}
+                size="medium"
+                color="error"
+              >
+                Create a New Quiz
+              </Button>
+            </Link>
           </Flex>
           <span className="quizzes-view-subtitle">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
