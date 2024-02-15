@@ -42,36 +42,37 @@ export default function KeywordsForm() {
 
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12}>
+          <Box
+            sx={{
+              margin: "0.5rem 0",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "0.5rem 0",
+            }}
+          >
+            {keywordTags.map((tag, index) => {
+              return (
+                <KeywordTag
+                  tagName={tag}
+                  key={index}
+                  handleTagDelete={handleTagDelete}
+                />
+              );
+            })}
+          </Box>
           <form onSubmit={handleOnSubmit}>
             <TextField
               inputRef={inputRef}
               fullWidth
               variant="standard"
               size="medium"
-              sx={{ lineHeight: "2rem", overflow: "auto" }}
-              placeholder="Enter keywords here"
-              InputProps={{
-                startAdornment: (
-                  <Box
-                    sx={{
-                      margin: "0.5rem 0",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.5rem 0",
-                    }}
-                  >
-                    {keywordTags.map((tag, index) => {
-                      return (
-                        <KeywordTag
-                          tagName={tag}
-                          key={index}
-                          handleTagDelete={handleTagDelete}
-                        />
-                      );
-                    })}
-                  </Box>
-                ),
+              sx={{
+                lineHeight: "2rem",
+                overflow: "auto",
+                flexDirection: "column !important",
               }}
+              placeholder="Enter keywords here"
             />
           </form>
         </Grid>

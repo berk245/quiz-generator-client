@@ -6,17 +6,22 @@ import { Grid } from "@mui/material";
 import { useAtom } from "jotai";
 import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
 import KeywordsForm from "./KeywordsForm";
+import MetapromptsForm from "./MetapromptsForm";
+import SourceUploadForm from "./SourceUploadForm";
+
 export default function CreateQuizForm() {
-  const [activeStep, setActiveStep] = useAtom(activeStepAtom);
+  const [activeStep] = useAtom(activeStepAtom);
 
   function getStepContent(step: number) {
     switch (step) {
       case 0:
         return <QuizInfoForm />;
       case 1:
-        return <></>;
+        return <SourceUploadForm />;
       case 2:
         return <KeywordsForm />;
+      case 3:
+        return <MetapromptsForm />;
       default:
         throw new Error("Unknown step");
     }
@@ -35,7 +40,7 @@ export default function CreateQuizForm() {
         {getStepContent(activeStep)}
       </Grid>
       <Grid item xs={11}>
-        <FormActions activeStep={activeStep} setActiveStep={setActiveStep} />
+        <FormActions />
       </Grid>
     </Grid>
   );

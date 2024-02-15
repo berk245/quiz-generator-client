@@ -13,7 +13,6 @@ export const newQuizDataAtom = atom({
   quizName: "",
   description: "",
   keywords: [] as string[],
-  concepts: [] as string[],
   metaPrompts: "",
   files: [] as File[],
 });

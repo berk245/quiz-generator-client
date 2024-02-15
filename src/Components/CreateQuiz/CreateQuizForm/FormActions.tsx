@@ -1,17 +1,21 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
+import { useAtom } from "jotai";
+import {
+  newQuizDataAtom,
+  activeStepAtom,
+} from "../../../Views/CreateQuiz/atoms";
 
-function FormActions({
-  activeStep,
-  setActiveStep,
-}: {
-  activeStep: number;
-  setActiveStep: React.Dispatch<React.SetStateAction<number>>;
-}) {
+function FormActions() {
+  const [activeStep, setActiveStep] = useAtom(activeStepAtom);
+  const [newQuizData] = useAtom(newQuizDataAtom);
+
   const handleNext = () => {
     if (activeStep < 3) setActiveStep(activeStep + 1);
-    else if (activeStep === 3) alert("Will make the request");
-    else return;
+    else if (activeStep === 3) {
+      console.log("Quiz Data:", newQuizData);
+      alert("Will make the request");
+    } else return;
   };
 
   const handleBack = () => {
