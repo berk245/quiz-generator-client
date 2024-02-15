@@ -5,16 +5,18 @@ import {
   newQuizDataAtom,
   activeStepAtom,
 } from "../../../Views/CreateQuiz/atoms";
+import { useCreateQuiz } from "../../../Api/quizzes";
 
 function FormActions() {
   const [activeStep, setActiveStep] = useAtom(activeStepAtom);
   const [newQuizData] = useAtom(newQuizDataAtom);
 
+  const { mutate: createQuiz, isPending, isError } = useCreateQuiz();
+
   const handleNext = () => {
     if (activeStep < 3) setActiveStep(activeStep + 1);
     else if (activeStep === 3) {
-      console.log("Quiz Data:", newQuizData);
-      alert("Will make the request");
+      createQuiz(newQuizData);
     } else return;
   };
 
