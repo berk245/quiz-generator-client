@@ -12,8 +12,8 @@ export const activeStepAtom = atom(0);
 export const newQuizDataAtom = atom({
   quizName: "",
   description: "",
-  keywords: [],
-  concepts: [],
+  keywords: [] as string[],
+  concepts: [] as string[],
   metaPrompts: "",
   files: [] as File[],
 });

@@ -5,6 +5,7 @@ import QuizInfoForm from "./QuizInfoForm";
 import { Grid } from "@mui/material";
 import { useAtom } from "jotai";
 import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
+import KeywordsForm from "./KeywordsForm";
 export default function CreateQuizForm() {
   const [activeStep, setActiveStep] = useAtom(activeStepAtom);
 
@@ -15,7 +16,7 @@ export default function CreateQuizForm() {
       case 1:
         return <></>;
       case 2:
-        return <></>;
+        return <KeywordsForm />;
       default:
         throw new Error("Unknown step");
     }
