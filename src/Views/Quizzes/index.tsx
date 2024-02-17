@@ -13,7 +13,7 @@ import { searchFilter, sortFilter } from "../../Components/Quizzes/helpers";
 import { Link } from "react-router-dom";
 
 function QuizzesView() {
-  const [sortBy, setSortBy] = useState("Date (ascending)");
+  const [sortBy, setSortBy] = useState("Date (new-old)");
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data: serverResponse, isLoading, isError, error } = useGetQuizzes();
