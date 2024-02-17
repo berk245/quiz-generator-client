@@ -8,12 +8,10 @@ import DefaultLayout from "../../Layouts/DefaultLayout";
 import CreateQuizFormContainer from "../../Components/CreateQuiz/FormContainer";
 import { useAtom } from "jotai";
 import { activeStepAtom, stepNamesAtom, newQuizDataAtom } from "./atoms";
-import FormActions from "../../Components/CreateQuiz/FormContainer/FormActions";
+import FormActions from "../../Components/CreateQuiz/FormActions";
 import { useCreateQuiz } from "../../Api/quizzes";
-import {
-  LoadingBackdrop,
-  SuccessBackdrop,
-} from "../../Components/CreateQuiz/FormContainer/Backdrops/LoadingBackdrop";
+import { LoadingBackdrop } from "../../Components/CreateQuiz/Backdrops/LoadingBackdrop";
+import { SuccessBackdrop } from "../../Components/CreateQuiz/Backdrops/SuccessBackdrop";
 
 export default function CreateQuiz() {
   const [activeStep, setActiveStep] = useAtom(activeStepAtom);

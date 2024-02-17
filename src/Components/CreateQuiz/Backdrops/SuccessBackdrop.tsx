@@ -1,28 +1,5 @@
-import {
-  Backdrop,
-  CircularProgress,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Backdrop, Grid, Paper, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
-
-export const LoadingBackdrop = ({ isPending }: { isPending: boolean }) => {
-  return (
-    <Backdrop
-      sx={{
-        color: "#fff",
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        flexDirection: "column",
-      }}
-      open={isPending}
-    >
-      <CircularProgress color="inherit" />
-      <br />
-      <span>Creating your quiz</span>
-    </Backdrop>
-  );
-};
 
 export const SuccessBackdrop = ({ isSuccess }: { isSuccess: boolean }) => {
   return (
