@@ -14,10 +14,33 @@ function FormActions() {
   const { mutate: createQuiz, isPending, isError } = useCreateQuiz();
 
   const handleNext = () => {
+    const { isStepValid, errorMessage } = validateStep();
+    if (!isStepValid) {
+      alert(errorMessage);
+      return;
+    }
     if (activeStep < 3) setActiveStep(activeStep + 1);
     else if (activeStep === 3) {
       createQuiz(newQuizData);
     } else return;
+  };
+
+  const validateStep = () => {
+    let errorMessage = "";
+    let isStepValid = true;
+    if (activeStep === 0) {
+      if (!newQuizData.quizTitle) {
+        isStepValid = false;
+        errorMessage = "Please enter a name for your quiz.";
+      }
+    } else if (activeStep === 1) {
+      if (!newQuizData.files.length) {
+        isStepValid = false;
+        errorMessage = "Please select a source for your quiz.";
+      }
+    }
+
+    return { isStepValid, errorMessage };
   };
 
   const handleBack = () => {
