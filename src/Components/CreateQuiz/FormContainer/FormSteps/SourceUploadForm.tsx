@@ -2,11 +2,11 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useAtom } from "jotai";
-import { newQuizDataAtom } from "../../../Views/CreateQuiz/atoms";
+import { newQuizDataAtom } from "../../../../Views/CreateQuiz/atoms";
 import { Button } from "@mui/material";
 import { CloudUpload, HighlightOff } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import Flex from "../../../Ui/Flex";
+import Flex from "../../../../Ui/Flex";
 import FormStepTitle from "./FormStepTitle";
 
 const VisuallyHiddenInput = styled("input")({
@@ -73,7 +73,7 @@ const SelectedFilesBox = ({
 }) => {
   return (
     <Grid item xs={12} sm={12}>
-      {files.length ? (
+      {files.length > 0 && (
         <>
           <Typography variant="subtitle1" fontWeight={600}>
             Selected File
@@ -97,8 +97,6 @@ const SelectedFilesBox = ({
             );
           })}
         </>
-      ) : (
-        <></>
       )}
     </Grid>
   );

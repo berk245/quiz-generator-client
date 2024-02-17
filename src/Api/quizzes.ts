@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import { QuizType } from "../types";
 
 const reqOptions = {
   headers: {

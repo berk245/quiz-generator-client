@@ -1,13 +1,13 @@
 import FormActions from "./FormActions";
-import QuizInfoForm from "./QuizInfoForm";
+import QuizInfoForm from "./FormSteps/QuizInfoForm";
 import { Grid } from "@mui/material";
 import { useAtom } from "jotai";
 import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
-import KeywordsForm from "./KeywordsForm";
-import SourceUploadForm from "./SourceUploadForm";
-import MetaPromptForm from "./MetaPromptForm";
+import KeywordsForm from "./FormSteps/KeywordsForm";
+import SourceUploadForm from "./FormSteps/SourceUploadForm";
+import MetaPromptForm from "./FormSteps/MetaPromptForm";
 
-export default function CreateQuizForm() {
+export default function CreateQuizFormContainer() {
   const [activeStep] = useAtom(activeStepAtom);
 
   function getStepContent(step: number) {
@@ -32,13 +32,9 @@ export default function CreateQuizForm() {
       minHeight={"10rem"}
       gap={"1rem"}
       alignContent={"space-between"}
-      padding={"0 2rem"}
     >
       <Grid item xs={11}>
         {getStepContent(activeStep)}
-      </Grid>
-      <Grid item xs={11}>
-        <FormActions />
       </Grid>
     </Grid>
   );
