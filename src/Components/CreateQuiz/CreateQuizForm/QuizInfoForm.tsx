@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useAtom } from "jotai";
 import { newQuizDataAtom } from "../../../Views/CreateQuiz/atoms";
+import FormStepTitle from "./FormStepTitle";
 
 export default function QuizInfoForm() {
   const [newQuizData, setNewQuizData] = useAtom(newQuizDataAtom);
@@ -17,21 +18,19 @@ export default function QuizInfoForm() {
 
   return (
     <Grid container>
-      <Typography variant="h6" gutterBottom>
-        Quiz Info
-      </Typography>
+      <FormStepTitle>Quiz Info</FormStepTitle>
 
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12}>
           <TextField
             required
-            id="quizName"
+            id="quizTitle"
             name="Quiz Name"
             label="Quiz Name"
             placeholder="Provide a catchy name for your quiz"
             fullWidth
             variant="standard"
-            value={newQuizData.quizName}
+            value={newQuizData.quizTitle}
             onChange={handleChange}
           />
         </Grid>

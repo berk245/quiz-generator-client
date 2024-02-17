@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { CloudUpload, HighlightOff } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import Flex from "../../../Ui/Flex";
+import FormStepTitle from "./FormStepTitle";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -40,6 +41,7 @@ export default function SourceUploadForm() {
 
   return (
     <Grid container>
+      <FormStepTitle>Upload Source</FormStepTitle>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Button

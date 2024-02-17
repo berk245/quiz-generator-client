@@ -6,6 +6,7 @@ import { newQuizDataAtom } from "../../../Views/CreateQuiz/atoms";
 import { Box } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import { KeywordTag } from "./KeywordTag";
+import FormStepTitle from "./FormStepTitle";
 
 export default function KeywordsForm() {
   const [newQuizData, setNewQuizData] = useAtom(newQuizDataAtom);
@@ -17,7 +18,7 @@ export default function KeywordsForm() {
   const handleOnSubmit = (e: any) => {
     if (inputRef.current) {
       e.preventDefault();
-      setKeywordTags([...keywordTags, inputRef.current.value]);
+      setKeywordTags([inputRef.current.value, ...keywordTags]);
       inputRef.current.value = "";
     }
   };
@@ -36,43 +37,51 @@ export default function KeywordsForm() {
 
   return (
     <Grid container>
-      <Typography variant="h6" gutterBottom mb={3}>
-        Keywords and Concepts
+      <FormStepTitle>Keywords and Concepts</FormStepTitle>
+      <Typography variant="subtitle2">
+        Provide keywords and key concepts that you want the quiz generator to
+        pay special attention on.
       </Typography>
-
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12}>
-          <Box
-            sx={{
-              margin: "0.5rem 0",
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              gap: "0.5rem 0",
-            }}
-          >
-            {keywordTags.map((tag, index) => {
-              return (
-                <KeywordTag
-                  tagName={tag}
-                  key={index}
-                  handleTagDelete={handleTagDelete}
-                />
-              );
-            })}
-          </Box>
+          {keywordTags.length > 0 && (
+            <Box
+              maxHeight={"5rem"}
+              overflow={"auto"}
+              sx={{
+                margin: "1rem 0",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: "0.5rem 0",
+                border: "1px solid #ebebeb",
+                padding: "1rem",
+              }}
+            >
+              {keywordTags.map((tag, index) => {
+                return (
+                  <KeywordTag
+                    tagName={tag}
+                    key={index}
+                    handleTagDelete={handleTagDelete}
+                  />
+                );
+              })}
+            </Box>
+          )}
+
           <form onSubmit={handleOnSubmit}>
             <TextField
               inputRef={inputRef}
               fullWidth
               variant="standard"
-              size="medium"
+              size="small"
               sx={{
                 lineHeight: "2rem",
                 overflow: "auto",
-                flexDirection: "column !important",
+                marginTop: "1rem",
               }}
-              placeholder="Enter keywords here"
+              placeholder="Enter keywords here and press Enter"
             />
           </form>
         </Grid>
