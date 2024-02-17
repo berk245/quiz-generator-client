@@ -10,9 +10,9 @@ export const stepNamesAtom = atom([
 export const activeStepAtom = atom(0);
 
 export const newQuizDataAtom = atom({
-  quizName: "",
+  quizTitle: "",
   description: "",
   keywords: [] as string[],
-  metaPrompts: "",
+  metaPrompt: "",
   files: [] as File[],
 });

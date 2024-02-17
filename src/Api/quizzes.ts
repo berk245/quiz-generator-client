@@ -26,22 +26,22 @@ export const useGetQuizzes = () => {
 };
 
 interface CreateQuizRequestType {
-  quizName: string;
+  quizTitle: string;
   description: string;
   keywords: string[];
-  metaPrompts: string;
+  metaPrompt: string;
   files: File[];
 }
 
 const CreateQuizFn = async (props: CreateQuizRequestType) => {
   const formData = new FormData();
 
-  formData.append("quiz_name", props.quizName);
+  formData.append("quiz_title", props.quizTitle);
   formData.append("quiz_description", props.description);
   formData.append("keywords", props.keywords.join(","));
   // To-do: create a loop to append multiple files
   formData.append("source_file", props.files[0]);
-  formData.append("meta_prompts", props.metaPrompts);
+  formData.append("meta_prompt", props.metaPrompt);
 
   const res = await axios({
     method: "POST",
