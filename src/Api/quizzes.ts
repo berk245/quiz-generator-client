@@ -58,8 +58,13 @@ export const useCreateQuiz = () => {
     mutationKey: ["createNewQuiz"],
     mutationFn: CreateQuizFn,
     onSuccess: (res) => {
-      console.log(res);
-      alert("Quiz successfully created.");
+      setTimeout(() => {
+        window.location.replace(`/quizzes/${res.quiz_id}`);
+      }, 3000);
+    },
+    onError: (err) => {
+      console.log(err);
+      alert("Something went wrong. Please try creating the quiz again.");
     },
   });
 };
