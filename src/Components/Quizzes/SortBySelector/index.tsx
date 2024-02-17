@@ -28,8 +28,8 @@ export const SortBySelector = ({
         value={sortValue}
         size="small"
       >
-        <MenuItem value="Date (ascending)">Date (ascending)</MenuItem>
-        <MenuItem value={"Date (descending)"}>Date (descending)</MenuItem>
+        <MenuItem value={"Date (new-old)"}>Date (new-old)</MenuItem>
+        <MenuItem value="Date (old-new)">Date (old-new)</MenuItem>
         <MenuItem value={"Name (a-z)"}>Name (a-z)</MenuItem>
         <MenuItem value={"Name (z-a)"}>Name (z-a)</MenuItem>
       </Select>

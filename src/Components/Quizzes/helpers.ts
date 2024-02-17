@@ -9,12 +9,12 @@ export const searchFilter = (term: string) => (quiz: QuizType) => {
 
 export const sortFilter =
   (sortBy: string) => (quizA: QuizType, quizB: QuizType) => {
-    if (sortBy === "Date (ascending)") {
+    if (sortBy === "Date (old-new)") {
       return (
         new Date(quizA.created_at).getTime() -
         new Date(quizB.created_at).getTime()
       );
-    } else if (sortBy === "Date (descending)") {
+    } else if (sortBy === "Date (new-old)") {
       return (
         new Date(quizB.created_at).getTime() -
         new Date(quizA.created_at).getTime()
