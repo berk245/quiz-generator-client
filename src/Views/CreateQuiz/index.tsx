@@ -28,7 +28,11 @@ export default function CreateQuiz() {
         </Typography>
         <Paper
           variant="outlined"
-          sx={{ my: { xs: 3, md: 4 }, p: { xs: 2, md: 3 } }}
+          sx={{
+            my: { xs: 3, md: 4 },
+            p: { xs: 2, md: 3 },
+            minWidth: "30rem",
+          }}
         >
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {stepNames.map((label) => (
