@@ -1,13 +1,11 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
 import FormActions from "./FormActions";
 import QuizInfoForm from "./QuizInfoForm";
 import { Grid } from "@mui/material";
 import { useAtom } from "jotai";
 import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
 import KeywordsForm from "./KeywordsForm";
-import MetapromptsForm from "./MetapromptsForm";
 import SourceUploadForm from "./SourceUploadForm";
+import MetaPromptForm from "./MetaPromptForm";
 
 export default function CreateQuizForm() {
   const [activeStep] = useAtom(activeStepAtom);
@@ -21,7 +19,7 @@ export default function CreateQuizForm() {
       case 2:
         return <KeywordsForm />;
       case 3:
-        return <MetapromptsForm />;
+        return <MetaPromptForm />;
       default:
         throw new Error("Unknown step");
     }
