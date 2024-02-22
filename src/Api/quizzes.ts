@@ -67,3 +67,23 @@ export const useCreateQuiz = () => {
     },
   });
 };
+
+interface GetQuizFnProps {
+  quizId?: string;
+}
+
+export const GetQuizFn = async (quizId?: string) => {
+  if (!quizId) return;
+  const res = await axios.get(
+    process.env.REACT_APP_SERVER_URL + `/quiz?quiz_id=${quizId}`,
+    reqOptions
+  );
+  return res.data.data;
+};
+
+export const useGetQuiz = (props: GetQuizFnProps) => {
+  return useQuery({
+    queryKey: ["get_quiz", props.quizId],
+    queryFn: () => GetQuizFn(props.quizId),
+  });
+};
