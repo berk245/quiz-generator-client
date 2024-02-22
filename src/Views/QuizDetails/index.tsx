@@ -18,7 +18,7 @@ function QuizDetailsView() {
     <DefaultLayout>
       <Grid container sx={{ height: "100%" }}>
         <QuizInfoSection quizInfo={quizInfo} />
-        <Grid item xs={8}>
+        <Grid item xs="auto">
           Right Section
         </Grid>
       </Grid>
@@ -60,7 +60,8 @@ const QuizInfoSection = ({ quizInfo }: { quizInfo: QuizInfoType }) => {
     <Grid
       item
       xs={4.5}
-      md={3}
+      sm={3}
+      md={2}
       direction="column"
       sx={{
         borderRight: "1px solid silver",
