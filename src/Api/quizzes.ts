@@ -1,12 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-
-const reqOptions = {
-  headers: {
-    Authorization: Cookies.get("auth_token"),
-  },
-};
+import { reqOptions } from "./constants";
 
 export const GetQuizzesFn = async () => {
   const res = await axios.get(
