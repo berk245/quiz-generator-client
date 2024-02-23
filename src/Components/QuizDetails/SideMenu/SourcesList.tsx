@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
-import { type ResponseSourceType } from "./InfoSideMenu";
+import { type ResponseSourceType } from ".";
 
 export const SourcesList = ({ sources }: { sources: ResponseSourceType[] }) => {
   return (
     <Grid
+      container
       direction="column"
       sx={{
         display: "flex",
