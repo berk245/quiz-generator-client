@@ -63,7 +63,7 @@ const QuizzesRoutes = () => (
   <Routes>
     <Route index element={<QuizzesView />} />
     <Route path="/new" element={<CreateQuizView />} />
-    <Route path="/:quiz_id" element={<QuizDetailsView />} />
+    <Route path="/:quizId" element={<QuizDetailsView />} />
   </Routes>
 );
 
