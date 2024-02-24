@@ -32,42 +32,24 @@ export const EditQuestion = ({
         }}
       >
         <Grid container direction={"column"}>
-          <TextField
-            label="Question: "
-            size="small"
+          <InputField
             value={editedQuestionInfo.question_text}
+            label="Question"
             id="question_text"
             onChange={handleInputChange}
-            sx={{
-              lineHeight: "2rem",
-              marginTop: "1rem",
-              fontSize: "0.85rem",
-            }}
           />
-          <TextField
-            label="Correct answer: "
-            size="small"
+          <InputField
             value={editedQuestionInfo.correct_answer}
-            id="coorect_answer"
+            label="Correct Answer"
+            id="correct_answer"
             onChange={handleInputChange}
-            sx={{
-              lineHeight: "2rem",
-              marginTop: "1rem",
-              fontSize: "0.85rem",
-            }}
           />
           {question.question_type === "multi" && (
-            <TextField
-              label="Multiple Choices: "
-              size="small"
+            <InputField
               value={editedQuestionInfo.multiple_choices}
+              label="Multiple Choices"
               id="multiple_choices"
               onChange={handleInputChange}
-              sx={{
-                lineHeight: "2rem",
-                marginTop: "1rem",
-                fontSize: "0.85rem",
-              }}
             />
           )}
         </Grid>
@@ -88,5 +70,32 @@ export const EditQuestion = ({
         </Grid>
       </Grid>
     </Grid>
+  );
+};
+
+const InputField = ({
+  value,
+  id,
+  label,
+  onChange,
+}: {
+  value: string;
+  label: string;
+  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
+  return (
+    <TextField
+      label={label}
+      size="small"
+      value={value}
+      id={id}
+      onChange={onChange}
+      sx={{
+        lineHeight: "2rem",
+        marginTop: "1rem",
+        fontSize: "0.85rem",
+      }}
+    />
   );
 };
