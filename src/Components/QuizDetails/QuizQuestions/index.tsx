@@ -12,7 +12,7 @@ import {
 } from "../questionDetailHelpers";
 import { QuestionSortSelect } from "./QuestionsSortSelector";
 import { QuestionsHeader } from "./QuestionsHeader";
-import { QuestionsList } from "./QuestionsList";
+import { QuestionsList } from "./QuestionList/QuestionsList";
 
 function QuizQuestionsSection() {
   const [sortBy, setSortBy] = useState("Date (new-old)");
