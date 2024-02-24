@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { QuizType } from "../../types";
+import { QuizType } from "../../../types";
 
 export const QuizInfoSection = ({ quiz }: { quiz: QuizType }) => {
   const titleKeyPairs = [
@@ -20,7 +20,7 @@ export const QuizInfoSection = ({ quiz }: { quiz: QuizType }) => {
       {titleKeyPairs.map(({ title, val }, index) => {
         return (
           <Grid
-            item
+            container
             key={index}
             direction="column"
             sx={{
