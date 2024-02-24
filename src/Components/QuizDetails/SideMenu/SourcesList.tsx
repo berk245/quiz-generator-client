@@ -1,5 +1,11 @@
 import { Grid } from "@mui/material";
-import { type ResponseSourceType } from ".";
+
+export interface ResponseSourceType {
+  created_at: string;
+  file_hash: string;
+  file_name: string;
+  source_id: number;
+}
 
 export const SourcesList = ({ sources }: { sources: ResponseSourceType[] }) => {
   return (
