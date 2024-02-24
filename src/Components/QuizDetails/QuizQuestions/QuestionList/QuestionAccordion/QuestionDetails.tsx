@@ -36,7 +36,6 @@ export const QuestionDetails = ({
             textTransform: "none",
             fontSize: "0.85rem",
             width: "100%",
-            // marginTop: "1rem",
             ":hover": {
               opacity: "0.8",
             },
