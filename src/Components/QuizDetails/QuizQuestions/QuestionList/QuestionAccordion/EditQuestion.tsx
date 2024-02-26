@@ -1,6 +1,7 @@
-import { Grid, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Grid, Button, TextField, LinearProgress } from "@mui/material";
+import React, { useContext, useState } from "react";
 import { QuestionType } from "../../../../../types";
+import { useUpdateQuestion } from "../../../../../Api/questions";
 
 export const EditQuestion = ({
   question,
@@ -18,57 +19,58 @@ export const EditQuestion = ({
     };
     setEditedQuestionInfo(newObj);
   };
+
+  const { mutate, isPending } = useUpdateQuestion();
+
   return (
     <Grid container>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          fontSize: "0.85rem",
-          gap: "0.5rem",
-        }}
-      >
-        <Grid container direction={"column"}>
-          <InputField
-            value={editedQuestionInfo.question_text}
-            label="Question"
-            id="question_text"
-            onChange={handleInputChange}
-          />
-          <InputField
-            value={editedQuestionInfo.correct_answer}
-            label="Correct Answer"
-            id="correct_answer"
-            onChange={handleInputChange}
-          />
-          {question.question_type === "multi" && (
+      {isPending ? (
+        <LinearProgress />
+      ) : (
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            fontSize: "0.85rem",
+            gap: "0.5rem",
+          }}
+        >
+          <Grid container direction={"column"}>
             <InputField
-              value={editedQuestionInfo.multiple_choices}
-              label="Multiple Choices"
-              id="multiple_choices"
+              value={editedQuestionInfo.question_text}
+              label="Question"
+              id="question_text"
               onChange={handleInputChange}
             />
-          )}
-        </Grid>
-        <Grid
-          justifyContent={"flex-end"}
-          sx={{ display: "flex", width: "100%" }}
-        >
-          <Button
-            onClick={() =>
-              console.log("Will send put request", editedQuestionInfo)
-            }
+            <InputField
+              value={editedQuestionInfo.correct_answer}
+              label="Correct Answer"
+              id="correct_answer"
+              onChange={handleInputChange}
+            />
+            {question.question_type === "multi" && (
+              <InputField
+                value={editedQuestionInfo.multiple_choices}
+                label="Multiple Choices"
+                id="multiple_choices"
+                onChange={handleInputChange}
+              />
+            )}
+          </Grid>
+          <Grid
+            justifyContent={"flex-end"}
+            sx={{ display: "flex", width: "100%" }}
           >
-            Update
-          </Button>
-          <Button color="error" onClick={() => toggleEdit(false)}>
-            Cancel
-          </Button>
+            <Button onClick={() => mutate(editedQuestionInfo)}>Update</Button>
+            <Button color="error" onClick={() => toggleEdit(false)}>
+              Cancel
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Grid>
   );
 };
