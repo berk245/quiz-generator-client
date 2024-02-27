@@ -24,7 +24,7 @@ export const QuestionDetails = ({
       >
         <span> Correct answer: {question.correct_answer}</span>
         {question.multiple_choices && (
-          <span> Multiple choices: {question.correct_answer}</span>
+          <span> Multiple choices: {question.multiple_choices}</span>
         )}
       </Grid>
       <Grid item xs={12} sx={{ width: "100%" }}>

@@ -1,11 +1,13 @@
 import { QuestionType } from "../../types";
 
-export const QuestionSearchFilter = (term: string) => (quiz: QuestionType) => {
-  return (
-    quiz.question_text.toLowerCase().includes(term.toLowerCase()) ||
-    quiz.multiple_choices.toLowerCase().includes(term.toLowerCase())
-  );
-};
+export const QuestionSearchFilter =
+  (term: string) => (question: QuestionType) => {
+    return (
+      question.question_text.toLowerCase().includes(term.toLowerCase()) ||
+      question.correct_answer.toLowerCase().includes(term.toLowerCase()) ||
+      question.multiple_choices.toLowerCase().includes(term.toLowerCase())
+    );
+  };
 
 export const QuestionSortFilter =
   (sortBy: string) => (questionA: QuestionType, questionB: QuestionType) => {
