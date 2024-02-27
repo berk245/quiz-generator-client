@@ -30,22 +30,20 @@ const GenerateQuestionsForm = () => {
   });
 
   const handleInputChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    let newObj;
-    if ("id" in e.target) {
-      newObj = {
-        ...generateSettings,
-        [e.target.id]: e.target.value,
-      };
-    } else {
-      newObj = {
-        ...generateSettings,
-        [e.target.name]: e.target.value,
-      };
-    }
+    const newObj = {
+      ...generateSettings,
+      [e.target.id]: e.target.value,
+    };
+    setGenerateSettings(newObj);
+  };
+
+  const handleSelectChange = (e: SelectChangeEvent) => {
+    const newObj = {
+      ...generateSettings,
+      [e.target.name]: e.target.value,
+    };
     setGenerateSettings(newObj);
   };
 
@@ -90,7 +88,7 @@ const GenerateQuestionsForm = () => {
             labelId="demo-simple-select-standard-label"
             id="question_type"
             value={generateSettings.question_type}
-            onChange={handleInputChange}
+            onChange={handleSelectChange}
           >
             <MenuItem value="multiple-choice">Multiple Choice</MenuItem>
             <MenuItem value="-" disabled>
