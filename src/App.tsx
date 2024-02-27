@@ -14,6 +14,7 @@ import QuizzesView from "./Views/Quizzes";
 import QuizDetailsView from "./Views/QuizDetails";
 import CreateQuizView from "./Views/CreateQuiz";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import GenerateQuestionsView from "./Views/GenerateQuestions";
 
 const isUserSignedIn = Cookies.get("auth_token") ? true : false;
 
@@ -64,6 +65,7 @@ const QuizzesRoutes = () => (
     <Route index element={<QuizzesView />} />
     <Route path="/new" element={<CreateQuizView />} />
     <Route path="/:quizId" element={<QuizDetailsView />} />
+    <Route path="/:quizId/generate" element={<GenerateQuestionsView />} />
   </Routes>
 );
 
