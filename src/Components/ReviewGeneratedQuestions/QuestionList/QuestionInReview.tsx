@@ -46,8 +46,9 @@ const QuestionInReview = ({
       {
         onSuccess: () => {
           setIsSubmitSuccess(true);
+          removeQuestion(question);
+
           setTimeout(() => {
-            removeQuestion(question);
             setShowQuestionBox(false);
             setIsSubmitSuccess(false);
           }, 4000);

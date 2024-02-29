@@ -15,7 +15,14 @@ const GeneratedQuestionsList = () => {
     const newList = [...generatedQuestions].filter(
       (a) => a.question_id !== question.question_id
     );
-    setGeneratedQuestions(newList);
+    if (newList.length) {
+      setGeneratedQuestions(newList);
+    } else {
+      // If the removed question is the last one, wait a couple seconds to show feedback
+      setTimeout(() => {
+        setGeneratedQuestions(newList);
+      }, 2000);
+    }
   };
   return (
     <Box

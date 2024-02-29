@@ -1,13 +1,14 @@
 import { generatedQuestionsAtom } from "../../Views/GenerateQuestions/atoms";
 import { useAtom } from "jotai";
-import { Grid, Button, Alert, Typography, Link } from "@mui/material";
+import { Grid, Button, Alert, Typography } from "@mui/material";
 
 import { CheckCircleRounded } from "@mui/icons-material";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import GeneratedQuestionsList from "./QuestionList/QuestionList";
 
 function ReviewGeneratedQuestions() {
   const [generatedQuestions] = useAtom(generatedQuestionsAtom);
+
   return (
     <Grid
       item
@@ -48,6 +49,7 @@ const PostReviewLinks = () => {
 
   return (
     <Grid
+      container
       direction={"column"}
       sx={{
         display: "flex",
@@ -66,16 +68,16 @@ const PostReviewLinks = () => {
           gap: "1rem",
         }}
       >
-        <Button variant="outlined" sx={{ textDecoration: "none" }}>
-          <Link href={`/quizzes/${quizId}`} underline="none">
+        <Link to={`quizzes/${quizId}`}>
+          <Button variant="outlined" sx={{ textTransform: "none" }}>
             Back to quiz overview
-          </Link>
-        </Button>
-        <Button variant="outlined" sx={{ textDecoration: "none" }}>
-          <Link href="" underline="none">
+          </Button>
+        </Link>
+        <Link to="" reloadDocument>
+          <Button variant="outlined" sx={{ textTransform: "none" }}>
             Generate more questions
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );
