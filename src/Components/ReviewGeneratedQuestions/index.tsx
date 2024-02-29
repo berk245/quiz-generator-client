@@ -1,6 +1,6 @@
 import { generatedQuestionsAtom } from "../../Views/GenerateQuestions/atoms";
 import { useAtom } from "jotai";
-import { Grid, Button, Alert, Typography } from "@mui/material";
+import { Grid, Button, Alert, Typography, Link } from "@mui/material";
 
 import { CheckCircleRounded } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
@@ -47,25 +47,36 @@ const PostReviewLinks = () => {
   const { quizId } = useParams();
 
   return (
-    <Grid>
+    <Grid
+      direction={"column"}
+      sx={{
+        display: "flex",
+        gap: "1rem",
+      }}
+    >
       <Alert
         icon={<CheckCircleRounded fontSize="inherit" />}
         severity="success"
+      >
+        <span>That was all!</span>
+      </Alert>
+      <Grid
         sx={{
           display: "flex",
           gap: "1rem",
         }}
       >
-        <span>That was all!</span>
-        <div className="">
-          <Button variant="outlined" sx={{ textDecoration: "none" }}>
-            <a href={`/quizzes/${quizId}`}>Go to your quiz</a>
-          </Button>
-          <Button variant="outlined" sx={{ textDecoration: "none" }}>
-            <a href="">Generate more questions</a>
-          </Button>
-        </div>
-      </Alert>
+        <Button variant="outlined" sx={{ textDecoration: "none" }}>
+          <Link href={`/quizzes/${quizId}`} underline="none">
+            Back to quiz overview
+          </Link>
+        </Button>
+        <Button variant="outlined" sx={{ textDecoration: "none" }}>
+          <Link href="" underline="none">
+            Generate more questions
+          </Link>
+        </Button>
+      </Grid>
     </Grid>
   );
 };
