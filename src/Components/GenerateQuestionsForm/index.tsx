@@ -56,15 +56,11 @@ const GenerateQuestionsForm = () => {
   };
 
   const isInputValid = (generateSettings: GenerateQuestionSettingsProps) => {
-    if (
-      !generateSettings.amount ||
-      !generateSettings.question_type ||
-      !generateSettings.quiz_id
-    ) {
-      return false;
-    }
-
-    return true;
+    return (
+      generateSettings.amount &&
+      generateSettings.question_type &&
+      generateSettings.quiz_id
+    );
   };
 
   const handleSubmit = () => {
