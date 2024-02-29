@@ -48,3 +48,33 @@ export const useUpdateQuestion = () => {
     },
   });
 };
+
+export interface GenerateQuestionSettingsProps {
+  quiz_id: string;
+  amount: number;
+  question_type: string;
+  instructions?: string;
+}
+
+const GenerateQuestionsFn = async (
+  GenerateQuestionSettings: GenerateQuestionSettingsProps
+) => {
+  const res = await axios({
+    method: "POST",
+    url: process.env.REACT_APP_SERVER_URL + "/questions",
+    data: JSON.stringify(GenerateQuestionSettings),
+    ...reqOptions,
+  });
+
+  return res.data;
+};
+
+export const useGenerateQuestions = () => {
+  return useMutation({
+    mutationKey: ["generateQuestions"],
+    mutationFn: GenerateQuestionsFn,
+    onError: (err) => {
+      alert("Something went wrong. Please try again.");
+    },
+  });
+};

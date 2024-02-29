@@ -9,21 +9,29 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { componentInDisplayAtom } from "../../Views/GenerateQuestions/atoms";
+import {
+  componentInDisplayAtom,
+  generatedQuestionsAtom,
+} from "../../Views/GenerateQuestions/atoms";
 import { LoadingButton } from "@mui/lab";
+import {
+  GenerateQuestionSettingsProps,
+  useGenerateQuestions,
+} from "../../Api/questions";
 
 const GenerateQuestionsForm = () => {
-  const [componentInDisplay, setComponentInDisplay] = useAtom(
-    componentInDisplayAtom
-  );
+  const setComponentInDisplay = useSetAtom(componentInDisplayAtom);
+  const setGeneratedQuestions = useSetAtom(generatedQuestionsAtom);
   const { quizId } = useParams();
   const navigate = useNavigate();
 
+  const { mutate, isPending } = useGenerateQuestions();
+
   const [generateSettings, setGenerateSettings] = useState({
-    quizId: quizId,
+    quiz_id: quizId ?? "",
     amount: 5,
     question_type: "multiple-choice",
     instructions: "",
@@ -47,8 +55,25 @@ const GenerateQuestionsForm = () => {
     setGenerateSettings(newObj);
   };
 
+  const isInputValid = (generateSettings: GenerateQuestionSettingsProps) => {
+    return (
+      generateSettings.amount &&
+      generateSettings.question_type &&
+      generateSettings.quiz_id
+    );
+  };
+
   const handleSubmit = () => {
-    console.log(generateSettings);
+    if (!isInputValid(generateSettings)) {
+      alert("Please fill all the required fields.");
+      return;
+    }
+    mutate(generateSettings, {
+      onSuccess: (res) => {
+        setGeneratedQuestions(res.questions);
+        setComponentInDisplay("results");
+      },
+    });
   };
 
   return (
@@ -112,7 +137,7 @@ const GenerateQuestionsForm = () => {
 
         <LoadingButton
           variant="contained"
-          // loading={isPending}
+          loading={isPending}
           onClick={handleSubmit}
         >
           Generate Questions
