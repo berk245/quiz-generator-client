@@ -4,6 +4,7 @@ import { InfoSideMenu } from "../../Components/QuizDetails/SideMenu";
 import GenerateQuestionsForm from "../../Components/GenerateQuestionsForm";
 import { useAtom } from "jotai";
 import { componentInDisplayAtom } from "./atoms";
+import ReviewGeneratedQuestions from "../../Components/ReviewGeneratedQuestions";
 
 function GenerateQuestionsView() {
   const [componentInDisplay] = useAtom(componentInDisplayAtom);
@@ -15,8 +16,7 @@ function GenerateQuestionsView() {
         {componentInDisplay === "settings" ? (
           <GenerateQuestionsForm />
         ) : (
-          // Results
-          <p>dsa</p>
+          <ReviewGeneratedQuestions />
         )}
       </Grid>
     </DefaultLayout>

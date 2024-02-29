@@ -61,7 +61,7 @@ const GenerateQuestionsFn = async (
 ) => {
   const res = await axios({
     method: "POST",
-    url: process.env.REACT_APP_SERVER_URL + "/questions",
+    url: process.env.REACT_APP_SERVER_URL + "/questions/generate",
     data: JSON.stringify(GenerateQuestionSettings),
     ...reqOptions,
   });
@@ -73,6 +73,32 @@ export const useGenerateQuestions = () => {
   return useMutation({
     mutationKey: ["generateQuestions"],
     mutationFn: GenerateQuestionsFn,
+    onError: (err) => {
+      alert("Something went wrong. Please try again.");
+    },
+  });
+};
+
+export interface AcceptQuestionProps {
+  quiz_id: string;
+  question: QuestionType;
+}
+
+const AcceptQuestionFn = async (acceptQuestionProps: AcceptQuestionProps) => {
+  const res = await axios({
+    method: "POST",
+    url: process.env.REACT_APP_SERVER_URL + "/questions",
+    data: JSON.stringify(acceptQuestionProps),
+    ...reqOptions,
+  });
+
+  return res.data;
+};
+
+export const useAcceptQuestion = () => {
+  return useMutation({
+    mutationKey: ["acceptQuestion"],
+    mutationFn: AcceptQuestionFn,
     onError: (err) => {
       alert("Something went wrong. Please try again.");
     },
