@@ -52,8 +52,8 @@ export const useUpdateQuestion = () => {
 export interface GenerateQuestionSettingsProps {
   quiz_id: string;
   amount: number;
-  instructions?: string;
   question_type: string;
+  instructions?: string;
 }
 
 const GenerateQuestionsFn = async (
