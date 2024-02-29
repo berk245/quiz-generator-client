@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button, Alert, Typography } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Alert,
+  Typography,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import { QuestionType } from "../../../types";
 
 import Accordion from "@mui/material/Accordion";
@@ -9,7 +17,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { Cancel, CheckCircleRounded, ExpandMore } from "@mui/icons-material";
 import { useAcceptQuestion } from "../../../Api/questions";
 import { useParams } from "react-router-dom";
-import InComponentOverlay from "../../../Ui/InComponentOverlay";
 
 const QuestionInReview = ({
   question,
@@ -31,35 +38,6 @@ const QuestionInReview = ({
     setQuestionToSubmit(newObj);
   };
 
-  const InputField = ({
-    value,
-    id,
-    label,
-    onChange,
-  }: {
-    value: string;
-    label: string;
-    id: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
-    return (
-      <TextField
-        label={label}
-        size="small"
-        value={value}
-        id={id}
-        onChange={onChange}
-        sx={{
-          marginTop: "1rem",
-
-          "& .MuiInputBase-input": {
-            fontSize: "0.85rem",
-          },
-        }}
-      />
-    );
-  };
-
   const { mutate: acceptQuestion, isPending } = useAcceptQuestion();
 
   const handleSubmit = () => {
@@ -67,12 +45,12 @@ const QuestionInReview = ({
       { quiz_id: quizId ?? "", question: question },
       {
         onSuccess: () => {
-          removeQuestion(question);
           setIsSubmitSuccess(true);
           setTimeout(() => {
+            removeQuestion(question);
             setShowQuestionBox(false);
             setIsSubmitSuccess(false);
-          }, 3000);
+          }, 4000);
         },
       }
     );
@@ -106,14 +84,13 @@ const QuestionInReview = ({
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
-        <InComponentOverlay open={isPending ?? false} />
-
         {isSubmitSuccess ? (
           <Alert
             icon={<CheckCircleRounded fontSize="inherit" />}
             severity="success"
           >
-            Here is a gentle confirmation that your action was successful.
+            Question added successfully. This box will automatically disappear
+            in a few seconds.
           </Alert>
         ) : (
           <Grid
@@ -179,8 +156,41 @@ const QuestionInReview = ({
           </Grid>
         )}
       </AccordionDetails>
+      {/* Loading backdrop during request */}
+      <Backdrop sx={{ color: "#fff", zIndex: 2 }} open={isPending}>
+        <CircularProgress size={60} thickness={4} />
+      </Backdrop>
     </Accordion>
   );
 };
 
 export default QuestionInReview;
+
+const InputField = ({
+  value,
+  id,
+  label,
+  onChange,
+}: {
+  value: string;
+  label: string;
+  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
+  return (
+    <TextField
+      label={label}
+      size="small"
+      value={value}
+      id={id}
+      onChange={onChange}
+      sx={{
+        marginTop: "1rem",
+
+        "& .MuiInputBase-input": {
+          fontSize: "0.85rem",
+        },
+      }}
+    />
+  );
+};
