@@ -37,7 +37,7 @@ export const QuestionsHeader = ({ children }: React.PropsWithChildren) => {
                 textTransform: "none",
               }}
             >
-              Generate More Questions
+              Generate Questions
             </Typography>
           </Button>
         </Link>
