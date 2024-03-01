@@ -9,20 +9,12 @@ const GeneratedQuestionsList = () => {
   const [generatedQuestions, setGeneratedQuestions] = useAtom(
     generatedQuestionsAtom
   );
-  const [generatedQuestionsCopy] = useState([...generatedQuestions]);
 
   const removeQuestion = (question: QuestionType) => {
     const newList = [...generatedQuestions].filter(
       (a) => a.question_id !== question.question_id
     );
-    if (newList.length) {
-      setGeneratedQuestions(newList);
-    } else {
-      // If the removed question is the last one, wait a couple seconds to show feedback
-      setTimeout(() => {
-        setGeneratedQuestions(newList);
-      }, 2000);
-    }
+    setGeneratedQuestions(newList);
   };
   return (
     <Box
@@ -32,7 +24,7 @@ const GeneratedQuestionsList = () => {
       flexBasis={"80%"}
       sx={{ overflow: "auto" }}
     >
-      {generatedQuestionsCopy.map((question, index) => {
+      {generatedQuestions.map((question, index) => {
         return (
           <QuestionInReview
             question={question}

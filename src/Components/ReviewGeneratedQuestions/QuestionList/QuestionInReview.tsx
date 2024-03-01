@@ -28,7 +28,7 @@ const QuestionInReview = ({
   const { quizId } = useParams();
   const [questionToSubmit, setQuestionToSubmit] = useState({ ...question });
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
-  const [showQuestionBox, setShowQuestionBox] = useState(true);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newObj = {
       ...questionToSubmit,
@@ -46,22 +46,18 @@ const QuestionInReview = ({
       {
         onSuccess: () => {
           setIsSubmitSuccess(true);
-          removeQuestion(question);
-
           setTimeout(() => {
-            setShowQuestionBox(false);
+            removeQuestion(question);
             setIsSubmitSuccess(false);
-          }, 4000);
+          }, 2000);
         },
       }
     );
   };
 
   const handleDismiss = () => {
-    setShowQuestionBox(false);
     removeQuestion(question);
   };
-  if (!showQuestionBox) return <></>;
   return (
     <Accordion
       disableGutters
@@ -81,85 +77,89 @@ const QuestionInReview = ({
           }}
         >
           {/* Chip */}
-          <Typography fontSize={"0.9rem"}>{question.question_text} </Typography>
+          <Typography fontSize={"0.9rem"}>
+            {question.question_id} {question.question_text}{" "}
+          </Typography>
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            fontSize: "0.85rem",
+            gap: "1.5rem",
+          }}
+        >
+          <Grid container direction={"column"}>
+            <InputField
+              value={question.question_text}
+              label="Question"
+              id="question_text"
+              onChange={handleInputChange}
+            />
+            <InputField
+              value={question.correct_answer}
+              label="Correct Answer"
+              id="correct_answer"
+              onChange={handleInputChange}
+            />
+            {question.question_type === "multi" && (
+              <InputField
+                value={question.multiple_choices}
+                label="Multiple Choices"
+                id="multiple_choices"
+                onChange={handleInputChange}
+              />
+            )}
+          </Grid>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              width: "100%",
+              gap: "0.5rem",
+            }}
+          >
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={handleSubmit}
+              sx={{ textTransform: "none", flexBasis: "50%" }}
+              startIcon={<CheckCircleRounded />}
+            >
+              Add Question To Your Quiz
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={handleDismiss}
+              sx={{ textTransform: "none", flexBasis: "50%" }}
+              startIcon={<Cancel />}
+            >
+              Dismiss Question
+            </Button>
+          </Grid>
+        </Grid>
+      </AccordionDetails>
+      {/* Loading backdrop during request */}
+      <Backdrop
+        sx={{ color: "#fff", zIndex: 2 }}
+        open={isPending || isSubmitSuccess}
+      >
         {isSubmitSuccess ? (
           <Alert
             icon={<CheckCircleRounded fontSize="inherit" />}
             severity="success"
           >
-            Question added successfully. This box will automatically disappear
-            in a few seconds.
+            Question added successfully.
           </Alert>
         ) : (
-          <Grid
-            item
-            xs={12}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              fontSize: "0.85rem",
-              gap: "1.5rem",
-            }}
-          >
-            <Grid container direction={"column"}>
-              <InputField
-                value={question.question_text}
-                label="Question"
-                id="question_text"
-                onChange={handleInputChange}
-              />
-              <InputField
-                value={question.correct_answer}
-                label="Correct Answer"
-                id="correct_answer"
-                onChange={handleInputChange}
-              />
-              {question.question_type === "multi" && (
-                <InputField
-                  value={question.multiple_choices}
-                  label="Multiple Choices"
-                  id="multiple_choices"
-                  onChange={handleInputChange}
-                />
-              )}
-            </Grid>
-            <Grid
-              sx={{
-                display: "flex",
-                justifyContent: "space-around",
-                width: "100%",
-                gap: "0.5rem",
-              }}
-            >
-              <Button
-                variant="outlined"
-                color="success"
-                onClick={handleSubmit}
-                sx={{ textTransform: "none", flexBasis: "50%" }}
-                startIcon={<CheckCircleRounded />}
-              >
-                Add Question To Your Quiz
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={handleDismiss}
-                sx={{ textTransform: "none", flexBasis: "50%" }}
-                startIcon={<Cancel />}
-              >
-                Dismiss Question
-              </Button>
-            </Grid>
-          </Grid>
+          <CircularProgress size={60} thickness={4} />
         )}
-      </AccordionDetails>
-      {/* Loading backdrop during request */}
-      <Backdrop sx={{ color: "#fff", zIndex: 2 }} open={isPending}>
-        <CircularProgress size={60} thickness={4} />
       </Backdrop>
     </Accordion>
   );
