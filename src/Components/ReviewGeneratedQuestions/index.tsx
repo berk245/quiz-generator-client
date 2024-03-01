@@ -68,7 +68,7 @@ const PostReviewLinks = () => {
           gap: "1rem",
         }}
       >
-        <Link to={`quizzes/${quizId}`}>
+        <Link to={`/quizzes/${quizId}`}>
           <Button variant="outlined" sx={{ textTransform: "none" }}>
             Back to quiz overview
           </Button>
