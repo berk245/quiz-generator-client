@@ -20,10 +20,10 @@ import { useParams } from "react-router-dom";
 
 const QuestionInReview = ({
   question,
-  removeQuestion,
+  removeQuestionFromList,
 }: {
   question: QuestionType;
-  removeQuestion: (e: QuestionType) => void;
+  removeQuestionFromList: (e: QuestionType) => void;
 }) => {
   const { quizId } = useParams();
   const [questionToSubmit, setQuestionToSubmit] = useState({ ...question });
@@ -47,7 +47,7 @@ const QuestionInReview = ({
         onSuccess: () => {
           setIsSubmitSuccess(true);
           setTimeout(() => {
-            removeQuestion(question);
+            removeQuestionFromList(question);
             setIsSubmitSuccess(false);
           }, 2000);
         },
@@ -56,7 +56,7 @@ const QuestionInReview = ({
   };
 
   const handleDismiss = () => {
-    removeQuestion(question);
+    removeQuestionFromList(question);
   };
   return (
     <Accordion
@@ -155,7 +155,7 @@ const QuestionInReview = ({
             icon={<CheckCircleRounded fontSize="inherit" />}
             severity="success"
           >
-            Question added successfully.
+            Question added to the quiz successfully.
           </Alert>
         ) : (
           <CircularProgress size={60} thickness={4} />

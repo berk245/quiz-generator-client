@@ -10,7 +10,7 @@ const GeneratedQuestionsList = () => {
     generatedQuestionsAtom
   );
 
-  const removeQuestion = (question: QuestionType) => {
+  const removeQuestionFromList = (question: QuestionType) => {
     const newList = [...generatedQuestions].filter(
       (a) => a.question_id !== question.question_id
     );
@@ -29,7 +29,7 @@ const GeneratedQuestionsList = () => {
           <QuestionInReview
             question={question}
             key={index}
-            removeQuestion={removeQuestion}
+            removeQuestionFromList={removeQuestionFromList}
           />
         );
       })}
