@@ -1,5 +1,8 @@
-import { generatedQuestionsAtom } from "../../Views/GenerateQuestions/atoms";
-import { useAtom } from "jotai";
+import {
+  componentInDisplayAtom,
+  generatedQuestionsAtom,
+} from "../../Views/GenerateQuestions/atoms";
+import { useAtom, useSetAtom } from "jotai";
 import { Grid, Button, Alert, Typography } from "@mui/material";
 
 import { CheckCircleRounded } from "@mui/icons-material";
@@ -47,6 +50,8 @@ export default ReviewGeneratedQuestions;
 const PostReviewLinks = () => {
   const { quizId } = useParams();
 
+  const setComponentInDisplay = useSetAtom(componentInDisplayAtom);
+
   return (
     <Grid
       container
@@ -69,7 +74,11 @@ const PostReviewLinks = () => {
         }}
       >
         <Link to={`/quizzes/${quizId}`}>
-          <Button variant="outlined" sx={{ textTransform: "none" }}>
+          <Button
+            onClick={() => setComponentInDisplay("settings")}
+            variant="outlined"
+            sx={{ textTransform: "none" }}
+          >
             Back to quiz overview
           </Button>
         </Link>
