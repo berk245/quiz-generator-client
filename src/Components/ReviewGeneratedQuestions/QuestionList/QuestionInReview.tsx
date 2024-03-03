@@ -145,22 +145,10 @@ const QuestionInReview = ({
           </Grid>
         </Grid>
       </AccordionDetails>
-      {/* Loading backdrop during request */}
-      <Backdrop
-        sx={{ color: "#fff", zIndex: 2 }}
-        open={isPending || isSubmitSuccess}
-      >
-        {isSubmitSuccess ? (
-          <Alert
-            icon={<CheckCircleRounded fontSize="inherit" />}
-            severity="success"
-          >
-            Question added to the quiz successfully.
-          </Alert>
-        ) : (
-          <CircularProgress size={60} thickness={4} />
-        )}
-      </Backdrop>
+      <LoadingBackdrop
+        isSubmitSuccess={isSubmitSuccess}
+        isPending={isPending}
+      />
     </Accordion>
   );
 };
@@ -193,5 +181,31 @@ const InputField = ({
         },
       }}
     />
+  );
+};
+
+const LoadingBackdrop = ({
+  isPending,
+  isSubmitSuccess,
+}: {
+  isPending: boolean;
+  isSubmitSuccess: boolean;
+}) => {
+  return (
+    <Backdrop
+      sx={{ color: "#fff", zIndex: 2 }}
+      open={isPending || isSubmitSuccess}
+    >
+      {isSubmitSuccess ? (
+        <Alert
+          icon={<CheckCircleRounded fontSize="inherit" />}
+          severity="success"
+        >
+          Question added to the quiz successfully.
+        </Alert>
+      ) : (
+        <CircularProgress size={60} thickness={4} />
+      )}
+    </Backdrop>
   );
 };
