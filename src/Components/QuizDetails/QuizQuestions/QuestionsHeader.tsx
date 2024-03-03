@@ -2,8 +2,19 @@ import { Grid, Typography, Button } from "@mui/material";
 import React from "react";
 import { GetApp, AddCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { QuestionType } from "../../../types";
 
-export const QuestionsHeader = ({ children }: React.PropsWithChildren) => {
+interface QuestionsHeaderProps extends React.PropsWithChildren {
+  questions: QuestionType[];
+}
+
+export const QuestionsHeader = ({
+  questions,
+  children,
+}: QuestionsHeaderProps) => {
+  const handleCSVExport = () => {
+    console.log(questions);
+  };
   return (
     <Grid
       container
@@ -53,7 +64,11 @@ export const QuestionsHeader = ({ children }: React.PropsWithChildren) => {
           gap: "1rem",
         }}
       >
-        <Button variant="outlined" title="Export questions to CSV">
+        <Button
+          variant="outlined"
+          title="Export questions to CSV"
+          onClick={handleCSVExport}
+        >
           <GetApp sx={{ marginRight: "0.5rem" }} />
           <Typography
             variant="subtitle2"
