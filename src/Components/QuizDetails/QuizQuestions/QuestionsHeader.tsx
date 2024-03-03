@@ -1,6 +1,7 @@
 import { Grid, Typography, Button } from "@mui/material";
 import React from "react";
 import { GetApp, AddCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export const QuestionsHeader = ({ children }: React.PropsWithChildren) => {
   return (
@@ -26,15 +27,20 @@ export const QuestionsHeader = ({ children }: React.PropsWithChildren) => {
         <Typography sx={{ fontSize: { xs: "1.25rem", lg: "1.5rem" } }}>
           Questions
         </Typography>
-        <Button variant="contained">
-          <AddCircle sx={{ marginRight: "0.5rem" }} />
-          <Typography
-            variant="subtitle2"
-            sx={{ display: { xs: "none", lg: "block" }, textTransform: "none" }}
-          >
-            Generate More Questions
-          </Typography>
-        </Button>
+        <Link to="generate">
+          <Button variant="contained">
+            <AddCircle sx={{ marginRight: "0.5rem" }} />
+            <Typography
+              variant="subtitle2"
+              sx={{
+                display: { xs: "none", lg: "block" },
+                textTransform: "none",
+              }}
+            >
+              Generate Questions
+            </Typography>
+          </Button>
+        </Link>
       </Grid>
 
       <Grid
