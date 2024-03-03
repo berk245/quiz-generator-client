@@ -64,7 +64,7 @@ function QuizQuestionsSection() {
       padding={"0rem 1rem"}
       sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
     >
-      <QuestionsHeader>
+      <QuestionsHeader questions={questions}>
         <QuestionSortSelect
           sortValue={sortBy}
           handleSortChange={handleSortChange}
