@@ -3,6 +3,7 @@ import React from "react";
 import { GetApp, AddCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { QuestionType } from "../../../types";
+import { useExportQuestions } from "../../../Api/questions";
 
 interface QuestionsHeaderProps extends React.PropsWithChildren {
   questions: QuestionType[];
@@ -12,9 +13,15 @@ export const QuestionsHeader = ({
   questions,
   children,
 }: QuestionsHeaderProps) => {
-  const handleCSVExport = () => {
-    console.log(questions);
+  const { mutate: exportToCSV, isPending } = useExportQuestions();
+
+  const formatExportData = () => {
+    return questions.map((question) => {
+      const { question_text, correct_answer, multiple_choices } = question;
+      return { question_text, correct_answer, multiple_choices };
+    });
   };
+
   return (
     <Grid
       container
@@ -67,7 +74,7 @@ export const QuestionsHeader = ({
         <Button
           variant="outlined"
           title="Export questions to CSV"
-          onClick={handleCSVExport}
+          onClick={() => exportToCSV({ questions: formatExportData() })}
         >
           <GetApp sx={{ marginRight: "0.5rem" }} />
           <Typography
