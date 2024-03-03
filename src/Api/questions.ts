@@ -104,3 +104,44 @@ export const useAcceptQuestion = () => {
     },
   });
 };
+
+interface ExportQuestionType {
+  question_text: string;
+  correct_answer: string;
+  multiple_choices?: string;
+}
+
+const ExportQuestionsFn = async ({
+  questions,
+}: {
+  questions: ExportQuestionType[];
+}) => {
+  const res = await axios({
+    method: "POST",
+    url: process.env.REACT_APP_SERVER_URL + "/questions/csv",
+    data: JSON.stringify(questions),
+    responseType: "blob",
+    ...reqOptions,
+  });
+
+  return res.data;
+};
+
+export const useExportQuestions = () => {
+  return useMutation({
+    mutationKey: ["exportQuestions"],
+    mutationFn: ExportQuestionsFn,
+    onError: (err) => {
+      alert("Something went wrong. Please try again.");
+    },
+    onSuccess: (res) => {
+      const blob = new Blob([res], { type: "text/csv" });
+      // Create a link element and trigger a download
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      // ToDo improve file name
+      link.download = "Qgen_Quiz_Questions.csv";
+      link.click();
+    },
+  });
+};
