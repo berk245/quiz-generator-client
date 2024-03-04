@@ -11,11 +11,12 @@ const GeneratedQuestionsList = () => {
   );
 
   const removeQuestionFromList = (question: QuestionType) => {
-    const newList = [...generatedQuestions].filter(
-      (a) => a.question_id !== question.question_id
-    );
+    const newList = [...generatedQuestions].filter((a) => {
+      return a.question_id !== question.question_id;
+    });
     setGeneratedQuestions(newList);
   };
+
   return (
     <Box
       display={"flex"}
@@ -24,11 +25,11 @@ const GeneratedQuestionsList = () => {
       flexBasis={"80%"}
       sx={{ overflow: "auto" }}
     >
-      {generatedQuestions.map((question, index) => {
+      {generatedQuestions.map((question) => {
         return (
           <QuestionInReview
             question={question}
-            key={index}
+            key={question.question_id}
             removeQuestionFromList={removeQuestionFromList}
           />
         );
