@@ -91,7 +91,7 @@ const QuestionInReview = ({
         >
           {/* Chip */}
           <Typography fontSize={"0.9rem"}>
-            {questionToSubmit.question_id} {questionToSubmit.question_text}
+            {questionToSubmit.question_text}
           </Typography>
         </Grid>
       </AccordionSummary>
