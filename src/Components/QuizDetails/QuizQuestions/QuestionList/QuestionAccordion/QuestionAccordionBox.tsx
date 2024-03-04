@@ -8,7 +8,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { EditQuestion } from "./EditQuestion";
 import { QuestionDetails } from "./QuestionDetails";
-import { QuestionBoxChip } from "./QuestionBoxChip";
+import { QuestionTypeChip } from "./QuestionTypeChip";
+import { DifficultyChip } from "./DifficultyChip";
+import { ScoreChip } from "./ScoreChip";
 
 export const QuestionAccordionBox = ({
   question,
@@ -35,7 +37,18 @@ export const QuestionAccordionBox = ({
             gap: "0.5rem",
           }}
         >
-          <QuestionBoxChip question_type={question.question_type} />
+          <Grid
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "0.25rem",
+              width: "15rem",
+            }}
+          >
+            <ScoreChip score={question.score} />
+            <DifficultyChip difficulty={question.difficulty} />
+            <QuestionTypeChip question_type={question.question_type} />
+          </Grid>
           <Typography fontSize={"0.9rem"}>{question.question_text} </Typography>
         </Grid>
       </AccordionSummary>
