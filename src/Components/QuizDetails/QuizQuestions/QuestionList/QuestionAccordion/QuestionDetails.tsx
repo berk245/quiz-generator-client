@@ -18,13 +18,18 @@ export const QuestionDetails = ({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          fontSize: "0.9rem",
+          fontSize: "0.85rem",
           gap: "0.5rem",
         }}
       >
-        <span> Correct answer: {question.correct_answer}</span>
+        <span>
+          {" "}
+          <strong>Correct answer</strong> : {question.correct_answer}
+        </span>
         {question.multiple_choices && (
-          <span> Multiple choices: {question.multiple_choices}</span>
+          <span>
+            <strong>Multiple choices</strong> : {question.multiple_choices}
+          </span>
         )}
       </Grid>
       <Grid item xs={12} sx={{ width: "100%" }}>

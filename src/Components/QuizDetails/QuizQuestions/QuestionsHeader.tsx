@@ -30,6 +30,7 @@ export const QuestionsHeader = ({
         width: "100%",
         justifyContent: "space-between",
         alignItems: "center",
+        flexBasis: "10%",
       }}
     >
       <Grid
