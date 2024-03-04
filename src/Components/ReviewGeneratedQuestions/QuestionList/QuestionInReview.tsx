@@ -7,6 +7,11 @@ import {
   Typography,
   Backdrop,
   CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
 } from "@mui/material";
 import { QuestionType } from "../../../types";
 
@@ -26,7 +31,7 @@ const QuestionInReview = ({
   removeQuestionFromList: (e: QuestionType) => void;
 }) => {
   const { quizId } = useParams();
-  const [questionToSubmit, setQuestionToSubmit] = useState({ ...question });
+  const [questionToSubmit, setQuestionToSubmit] = useState(question);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,16 +43,24 @@ const QuestionInReview = ({
     setQuestionToSubmit(newObj);
   };
 
+  const handleSelectChange = (e: SelectChangeEvent) => {
+    const newObj = {
+      ...questionToSubmit,
+      [e.target.name]: e.target.value,
+    };
+    setQuestionToSubmit(newObj);
+  };
+
   const { mutate: acceptQuestion, isPending } = useAcceptQuestion();
 
   const handleSubmit = () => {
     acceptQuestion(
-      { quiz_id: quizId ?? "", question: question },
+      { quiz_id: quizId ?? "", question: questionToSubmit },
       {
         onSuccess: () => {
           setIsSubmitSuccess(true);
           setTimeout(() => {
-            removeQuestionFromList(question);
+            removeQuestionFromList(questionToSubmit);
             setIsSubmitSuccess(false);
           }, 2000);
         },
@@ -56,7 +69,7 @@ const QuestionInReview = ({
   };
 
   const handleDismiss = () => {
-    removeQuestionFromList(question);
+    removeQuestionFromList(questionToSubmit);
   };
   return (
     <Accordion
@@ -78,7 +91,7 @@ const QuestionInReview = ({
         >
           {/* Chip */}
           <Typography fontSize={"0.9rem"}>
-            {question.question_id} {question.question_text}{" "}
+            {questionToSubmit.question_id} {questionToSubmit.question_text}
           </Typography>
         </Grid>
       </AccordionSummary>
@@ -94,27 +107,63 @@ const QuestionInReview = ({
             gap: "1.5rem",
           }}
         >
-          <Grid container direction={"column"}>
+          <Grid container direction={"column"} gap={2}>
             <InputField
-              value={question.question_text}
+              value={questionToSubmit.question_text}
               label="Question"
               id="question_text"
               onChange={handleInputChange}
             />
             <InputField
-              value={question.correct_answer}
+              value={questionToSubmit.correct_answer}
               label="Correct Answer"
               id="correct_answer"
               onChange={handleInputChange}
             />
-            {question.question_type === "multi" && (
+            {questionToSubmit.question_type === "multi" && (
               <InputField
-                value={question.multiple_choices}
+                value={questionToSubmit.multiple_choices}
                 label="Multiple Choices"
                 id="multiple_choices"
                 onChange={handleInputChange}
               />
             )}
+            <FormControl variant="outlined">
+              <InputLabel id="question-difficulty-selector">
+                Difficulty
+              </InputLabel>
+              <Select
+                labelId="question-difficulty-selector"
+                name="difficulty"
+                value={questionToSubmit.difficulty ?? ""}
+                onChange={handleSelectChange}
+                size="small"
+                sx={{ fontSize: "0.9rem" }}
+              >
+                <MenuItem disabled value="-">
+                  Choose difficulty level
+                </MenuItem>
+                <MenuItem value="easy">Easy</MenuItem>
+                <MenuItem value="medium">Medium</MenuItem>
+                <MenuItem value="hard">Hard</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              label="Score"
+              size="small"
+              type="number"
+              value={questionToSubmit.score}
+              id="score"
+              onChange={handleInputChange}
+              inputProps={{
+                min: 0, // Set your minimum value
+                max: 5, // Set your maximum value
+              }}
+              sx={{
+                lineHeight: "2rem",
+                fontSize: "0.85rem",
+              }}
+            />
           </Grid>
           <Grid
             sx={{
@@ -174,8 +223,6 @@ const InputField = ({
       id={id}
       onChange={onChange}
       sx={{
-        marginTop: "1rem",
-
         "& .MuiInputBase-input": {
           fontSize: "0.85rem",
         },
