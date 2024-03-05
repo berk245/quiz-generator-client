@@ -109,8 +109,8 @@ export const EditQuestion = ({
               id="score"
               onChange={handleInputChange}
               inputProps={{
-                min: 0, // Set your minimum value
-                max: 5, // Set your maximum value
+                min: 0, 
+                max: 5,
               }}
               sx={{
                 "& .MuiInputBase-input": {
