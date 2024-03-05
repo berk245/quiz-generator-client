@@ -12,6 +12,7 @@ export const QuestionsList = ({ questions }: { questions: QuestionType[] }) => {
         sx={{
           border: "1px solid #ebebeb",
           borderRadius: "5px",
+          overflow: "auto",
         }}
       >
         {questions.map((question) => {

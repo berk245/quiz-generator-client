@@ -1,5 +1,16 @@
-import { Grid, Button, TextField, LinearProgress } from "@mui/material";
-import React, { useContext, useState } from "react";
+import {
+  Grid,
+  Button,
+  TextField,
+  LinearProgress,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+
+import React, { useState } from "react";
 import { QuestionType } from "../../../../../types";
 import { useUpdateQuestion } from "../../../../../Api/questions";
 
@@ -16,6 +27,14 @@ export const EditQuestion = ({
     const newObj = {
       ...editedQuestionInfo,
       [e.target.id]: e.target.value,
+    };
+    setEditedQuestionInfo(newObj);
+  };
+
+  const handleSelectChange = (e: SelectChangeEvent) => {
+    const newObj = {
+      ...editedQuestionInfo,
+      [e.target.name]: e.target.value,
     };
     setEditedQuestionInfo(newObj);
   };
@@ -38,7 +57,7 @@ export const EditQuestion = ({
             gap: "0.5rem",
           }}
         >
-          <Grid container direction={"column"}>
+          <Grid container direction={"column"} gap={2}>
             <InputField
               value={editedQuestionInfo.question_text}
               label="Question"
@@ -59,6 +78,47 @@ export const EditQuestion = ({
                 onChange={handleInputChange}
               />
             )}
+            <FormControl variant="outlined">
+              <InputLabel
+                id="question-difficulty-selector"
+                sx={{ backgroundColor: "white" }}
+              >
+                Difficulty
+              </InputLabel>
+              <Select
+                labelId="question-difficulty-selector"
+                name="difficulty"
+                value={editedQuestionInfo.difficulty ?? ""}
+                onChange={handleSelectChange}
+                size="small"
+                sx={{ fontSize: "0.8rem" }}
+              >
+                <MenuItem disabled value="-">
+                  Choose difficulty level
+                </MenuItem>
+                <MenuItem value="easy">Easy</MenuItem>
+                <MenuItem value="medium">Medium</MenuItem>
+                <MenuItem value="hard">Hard</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              label="Score"
+              size="small"
+              type="number"
+              value={editedQuestionInfo.score}
+              id="score"
+              onChange={handleInputChange}
+              inputProps={{
+                min: 0, 
+                max: 5,
+              }}
+              sx={{
+                "& .MuiInputBase-input": {
+                  height: "1.5rem",
+                  fontSize: "0.85rem",
+                },
+              }}
+            />
           </Grid>
           <Grid
             justifyContent={"flex-end"}
@@ -94,9 +154,10 @@ const InputField = ({
       id={id}
       onChange={onChange}
       sx={{
-        lineHeight: "2rem",
-        marginTop: "1rem",
-        fontSize: "0.85rem",
+        "& .MuiInputBase-input": {
+          height: "1.5rem",
+          fontSize: "0.85rem",
+        },
       }}
     />
   );

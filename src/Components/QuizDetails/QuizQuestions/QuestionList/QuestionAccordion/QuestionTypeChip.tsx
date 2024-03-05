@@ -1,6 +1,6 @@
 import { Chip } from "@mui/material";
 
-export const QuestionBoxChip = ({
+export const QuestionTypeChip = ({
   question_type,
 }: {
   question_type: string;
@@ -10,11 +10,12 @@ export const QuestionBoxChip = ({
   return (
     <Chip
       variant="outlined"
-      label={isMultiptleChioce ? "multiple choice" : "other type"}
+      label={isMultiptleChioce ? "Multiple choice" : "other type"}
       color={isMultiptleChioce ? "secondary" : "info"}
       size="small"
       sx={{
-        fontSize: "0.6rem",
+        fontSize: "0.75rem",
+        flexBasis: "33%",
       }}
     />
   );

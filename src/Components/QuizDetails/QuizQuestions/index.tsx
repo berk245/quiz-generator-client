@@ -62,7 +62,13 @@ function QuizQuestionsSection() {
       xs={8}
       sm={9.75}
       padding={"0rem 1rem"}
-      sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        height: "100%",
+        overflow: "auto",
+      }}
     >
       <QuestionsHeader questions={questions}>
         <QuestionSortSelect

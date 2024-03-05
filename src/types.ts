@@ -15,5 +15,7 @@ export interface QuestionType {
   question_text: string;
   multiple_choices: string;
   correct_answer: string;
+  difficulty: string;
+  score: string;
   created_at: string;
 }
