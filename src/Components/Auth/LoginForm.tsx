@@ -33,7 +33,6 @@ function LoginForm() {
 
   const handleSubmit = () => {
     if (isInputValidated()) {
-      console.log("Input calidated");
       loginUser({ email: email, password: password });
     }
   };
