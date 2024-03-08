@@ -4,7 +4,7 @@ export const stepNamesAtom = atom([
   "Quiz Info",
   "Sources",
   "Keywords & Concepts",
-  "Quiz Instructions",
+  "Quiz Level Instructions",
 ]);
 
 export const activeStepAtom = atom(0);
