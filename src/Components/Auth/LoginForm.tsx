@@ -38,7 +38,7 @@ function LoginForm() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") loginUser({ email: email, password: password });
+    if (e.key === "Enter") handleSubmit();
   };
 
   const isInputValidated = () => {
