@@ -42,6 +42,10 @@ export default function SourceUploadForm() {
   return (
     <Grid container>
       <FormStepTitle>Upload Source</FormStepTitle>
+      <Typography variant="subtitle2" mb={3}>
+        Upload a file to generate questions from. Note: The application
+        currently supports only <strong>PDF</strong> format.
+      </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Button
@@ -52,7 +56,11 @@ export default function SourceUploadForm() {
             fullWidth
           >
             Upload file
-            <VisuallyHiddenInput type="file" onChange={handleChange} />
+            <VisuallyHiddenInput
+              type="file"
+              onChange={handleChange}
+              accept="application/pdf"
+            />
           </Button>
         </Grid>
         <SelectedFilesBox
