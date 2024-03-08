@@ -82,6 +82,7 @@ export default function KeywordsForm() {
                 marginTop: "1rem",
               }}
               placeholder="Enter keywords here and press Enter"
+              error={newQuizData.keywords.join(",").length > 1000}
             />
           </form>
         </Grid>

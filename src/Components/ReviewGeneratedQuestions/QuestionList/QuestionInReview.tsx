@@ -54,6 +54,12 @@ const QuestionInReview = ({
   const { mutate: acceptQuestion, isPending } = useAcceptQuestion();
 
   const handleSubmit = () => {
+    if (!isQuestionValid()) {
+      alert(
+        "Question fields exceeds the character limit. Please make them shorter and trey again."
+      );
+      return;
+    }
     acceptQuestion(
       { quiz_id: quizId ?? "", question: questionToSubmit },
       {
@@ -70,6 +76,14 @@ const QuestionInReview = ({
 
   const handleDismiss = () => {
     removeQuestionFromList(questionToSubmit);
+  };
+
+  const isQuestionValid = () => {
+    return (
+      questionToSubmit.question_text.length < 1000 &&
+      questionToSubmit.correct_answer.length < 1000 &&
+      questionToSubmit.multiple_choices.length < 1000
+    );
   };
   return (
     <Accordion
@@ -89,7 +103,6 @@ const QuestionInReview = ({
             gap: "0.5rem",
           }}
         >
-          {/* Chip */}
           <Typography fontSize={"0.9rem"}>
             {questionToSubmit.question_text}
           </Typography>
@@ -222,6 +235,7 @@ const InputField = ({
       value={value}
       id={id}
       onChange={onChange}
+      error={value.length > 1000}
       sx={{
         "& .MuiInputBase-input": {
           fontSize: "0.85rem",

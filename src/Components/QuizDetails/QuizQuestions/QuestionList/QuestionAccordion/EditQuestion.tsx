@@ -41,6 +41,24 @@ export const EditQuestion = ({
 
   const { mutate, isPending } = useUpdateQuestion();
 
+  const isQuestionValid = () => {
+    return (
+      editedQuestionInfo.question_text.length < 1000 &&
+      editedQuestionInfo.correct_answer.length < 1000 &&
+      editedQuestionInfo.multiple_choices.length < 1000
+    );
+  };
+
+  const handleSubmit = () => {
+    if (!isQuestionValid()) {
+      alert(
+        "Question fields exceeds the character limit. Please make them shorter and trey again."
+      );
+      return;
+    }
+    mutate(editedQuestionInfo);
+  };
+
   return (
     <Grid container>
       {isPending ? (
@@ -109,7 +127,7 @@ export const EditQuestion = ({
               id="score"
               onChange={handleInputChange}
               inputProps={{
-                min: 0, 
+                min: 0,
                 max: 5,
               }}
               sx={{
@@ -124,7 +142,7 @@ export const EditQuestion = ({
             justifyContent={"flex-end"}
             sx={{ display: "flex", width: "100%" }}
           >
-            <Button onClick={() => mutate(editedQuestionInfo)}>Update</Button>
+            <Button onClick={handleSubmit}>Update</Button>
             <Button color="error" onClick={() => toggleEdit(false)}>
               Cancel
             </Button>
@@ -153,6 +171,7 @@ const InputField = ({
       value={value}
       id={id}
       onChange={onChange}
+      error={value.length > 1000}
       sx={{
         "& .MuiInputBase-input": {
           height: "1.5rem",

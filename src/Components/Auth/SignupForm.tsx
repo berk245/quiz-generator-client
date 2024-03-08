@@ -6,39 +6,50 @@ import {
   OutlinedInput,
   IconButton,
   InputAdornment,
+  FormHelperText,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 import { useSignupUser } from "../../Api/auth";
+import { isValidEmail } from "./helpers";
 
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const navigate = useNavigate();
 
-  const { mutate: signupUser, data, isPending, isError, error, isSuccess  } = useSignupUser();
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
+  const { mutate: signupUser, isPending, isError, error } = useSignupUser();
 
   const handleSubmit = async () => {
-    // To-do: Validate input either here or in the signup function
-    signupUser({email, password})
+    if (isInputValidated()) {
+      signupUser({ email, password });
+    }
   };
 
-  const isValidEmail = (email: string) => {
-    if (!email) return true;
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+  const isInputValidated = () => {
+    let isValid = true;
+    if (!email.length || !isValidEmail(email)) {
+      isValid = false;
+      setEmailError("Please provide a valid email address.");
+    } else if (email.length > 254) {
+      isValid = false;
+      setEmailError("This email is longer than accepted values.");
+    }
+    if (password.length < 6) {
+      isValid = false;
+      setPasswordError("Password should be at least 6 characters long.");
+    } else if (password.length > 60) {
+      isValid = false;
+      setPasswordError("Password is too long.");
+    }
+    if (password !== passwordRepeat) isValid = false;
+    return isValid;
   };
-
-  console.log(error);
-
 
   return (
     <Box
@@ -52,6 +63,7 @@ function SignupForm() {
         label="Email"
         variant="outlined"
         error={!isValidEmail(email)}
+        helperText={emailError}
         onChange={(e) => setEmail(e.target.value)}
       />
       <FormControl variant="outlined">
@@ -60,6 +72,7 @@ function SignupForm() {
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
+          error={passwordError.length > 0}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -74,6 +87,9 @@ function SignupForm() {
           }
           label="Password"
         />
+        <FormHelperText error={passwordError.length > 0}>
+          {passwordError}
+        </FormHelperText>
       </FormControl>
       <FormControl variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">
@@ -98,6 +114,13 @@ function SignupForm() {
           }
           label="Password"
         />
+        {passwordRepeat.length !== 0 && password !== passwordRepeat && (
+          <FormHelperText
+            error={passwordRepeat.length !== 0 && password !== passwordRepeat}
+          >
+            Passwords do not match
+          </FormHelperText>
+        )}
       </FormControl>
       {isError && (
         <div className="auth-form-error-message">

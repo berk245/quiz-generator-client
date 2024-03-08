@@ -35,6 +35,7 @@ export default function QuizInstructionsForm() {
             name="Quiz metaPrompt Input"
             placeholder="Example: Create questions suitable for high school students familiar with programming concepts but new to the language. Emphasize syntax and programming language quirks over fundamental concepts."
             fullWidth
+            error={newQuizData.metaPrompt.length > 1000}
             variant="standard"
             value={newQuizData.metaPrompt}
             onChange={handleChange}
