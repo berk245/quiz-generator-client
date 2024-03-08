@@ -1,13 +1,15 @@
 import { Box, Button } from "@mui/material";
 import { useAtom } from "jotai";
 import { newQuizDataAtom, activeStepAtom } from "../../Views/CreateQuiz/atoms";
+import { isKeywordsValid, isQuizInfoValid, validateStep } from "./validators";
 
 function FormActions({ createQuiz }: { createQuiz: () => void }) {
   const [activeStep, setActiveStep] = useAtom(activeStepAtom);
   const [newQuizData] = useAtom(newQuizDataAtom);
 
   const handleNext = () => {
-    const { isStepValid, errorMessage } = validateStep();
+    const { isStepValid, errorMessage } = validateStep(activeStep, newQuizData);
+
     if (!isStepValid) {
       alert(errorMessage);
       return;
@@ -16,24 +18,6 @@ function FormActions({ createQuiz }: { createQuiz: () => void }) {
     else if (activeStep === 3) {
       createQuiz();
     } else return;
-  };
-
-  const validateStep = () => {
-    let errorMessage = "";
-    let isStepValid = true;
-    if (activeStep === 0) {
-      if (!newQuizData.quizTitle) {
-        isStepValid = false;
-        errorMessage = "Please enter a name for your quiz.";
-      }
-    } else if (activeStep === 1) {
-      if (!newQuizData.files.length) {
-        isStepValid = false;
-        errorMessage = "Please select a source for your quiz.";
-      }
-    }
-
-    return { isStepValid, errorMessage };
   };
 
   const handleBack = () => {

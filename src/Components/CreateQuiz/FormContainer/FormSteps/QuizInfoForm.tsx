@@ -32,6 +32,7 @@ export default function QuizInfoForm() {
             variant="standard"
             value={newQuizData.quizTitle}
             onChange={handleChange}
+            error={newQuizData.quizTitle.length > 60}
           />
         </Grid>
         <Grid item xs={12}>
@@ -45,6 +46,7 @@ export default function QuizInfoForm() {
             variant="standard"
             value={newQuizData.description}
             onChange={handleChange}
+            error={newQuizData.description.length > 255}
           />
         </Grid>
       </Grid>

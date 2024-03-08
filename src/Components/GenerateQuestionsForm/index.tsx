@@ -56,8 +56,15 @@ const GenerateQuestionsForm = () => {
   };
 
   const isInputValid = (generateSettings: GenerateQuestionSettingsProps) => {
+    if (generateSettings.instructions) {
+      if (generateSettings.instructions.length > 1000) {
+        return false;
+      }
+    }
+
     return (
       generateSettings.amount &&
+      generateSettings.amount < 20 &&
       generateSettings.question_type &&
       generateSettings.quiz_id
     );
@@ -103,6 +110,10 @@ const GenerateQuestionsForm = () => {
           value={generateSettings.amount}
           onChange={handleInputChange}
           sx={{ background: "#fff" }}
+          inputProps={{
+            min: 1,
+            max: 20,
+          }}
         />
         <FormControl variant="filled" sx={{ background: "#fff" }}>
           <InputLabel id="demo-simple-select-standard-label">
@@ -132,6 +143,7 @@ const GenerateQuestionsForm = () => {
           variant="filled"
           value={generateSettings.instructions}
           onChange={handleInputChange}
+          error={generateSettings.instructions.length > 1000}
           sx={{ background: "#fff" }}
         />
 
