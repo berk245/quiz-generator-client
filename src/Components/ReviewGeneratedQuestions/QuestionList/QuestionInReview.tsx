@@ -56,7 +56,7 @@ const QuestionInReview = ({
   const handleSubmit = () => {
     if (!isQuestionValid()) {
       alert(
-        "Question fields exceeds the character limit. Please make them shorter and trey again."
+        "Question fields exceeds the character limit. Please make them shorter and try again."
       );
       return;
     }
