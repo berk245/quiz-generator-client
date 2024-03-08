@@ -39,8 +39,8 @@ export default function KeywordsForm() {
     <Grid container>
       <FormStepTitle>Keywords and Concepts</FormStepTitle>
       <Typography variant="subtitle2">
-        Provide keywords and key concepts that you want the quiz generator to
-        pay special attention on.
+        (Optional) Provide keywords and key concepts that you want the quiz
+        generator to pay special attention on.
       </Typography>
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12}>

@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { newQuizDataAtom } from "../../../../Views/CreateQuiz/atoms";
 import FormStepTitle from "./FormStepTitle";
 
-export default function MetaPromptForm() {
+export default function QuizInstructionsForm() {
   const [newQuizData, setNewQuizData] = useAtom(newQuizDataAtom);
 
   const handleChange = (e: any) => {
@@ -18,7 +18,7 @@ export default function MetaPromptForm() {
 
   return (
     <Grid container>
-      <FormStepTitle>Meta-prompts</FormStepTitle>
+      <FormStepTitle>Quiz Level Instructions</FormStepTitle>
 
       <Grid item gap={3}>
         <Typography variant="subtitle2">
@@ -33,7 +33,7 @@ export default function MetaPromptForm() {
             multiline
             size="small"
             name="Quiz metaPrompt Input"
-            placeholder="Example: ask questions as a mysterious wizard..."
+            placeholder="Example: Create questions suitable for high school students familiar with programming concepts but new to the language. Emphasize syntax and programming language quirks over fundamental concepts."
             fullWidth
             variant="standard"
             value={newQuizData.metaPrompt}
