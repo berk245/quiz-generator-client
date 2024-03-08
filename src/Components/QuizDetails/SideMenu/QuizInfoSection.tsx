@@ -12,7 +12,7 @@ export const QuizInfoSection = ({ quiz }: { quiz: QuizType }) => {
       val: quiz.quiz_description,
     },
     { title: "Keywords", val: quiz.keywords },
-    { title: "Metaprompt", val: quiz.meta_prompt },
+    { title: "Quiz Level Instructions", val: quiz.meta_prompt },
   ];
 
   return (
