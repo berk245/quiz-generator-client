@@ -72,7 +72,9 @@ const GenerateQuestionsForm = () => {
 
   const handleSubmit = () => {
     if (!isInputValid(generateSettings)) {
-      alert("Please fill all the required fields.");
+      alert(
+        "Please make sure the required fields are filled with accepted values."
+      );
       return;
     }
     mutate(generateSettings, {
@@ -107,9 +109,16 @@ const GenerateQuestionsForm = () => {
           label="Amount"
           type="number"
           variant="filled"
+          required
           value={generateSettings.amount}
           onChange={handleInputChange}
           sx={{ background: "#fff" }}
+          error={generateSettings.amount > 20}
+          helperText={
+            generateSettings.amount > 20
+              ? "Maximum 20 questions at a time."
+              : ""
+          }
           inputProps={{
             min: 1,
             max: 20,
