@@ -22,12 +22,37 @@ function SignupForm() {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [signupErrorText, setSignupErrorText] = useState("");
 
-  const { mutate: signupUser, isPending, isError, error } = useSignupUser();
+  const { mutate: signupUser, isPending, isError } = useSignupUser();
+
+  const resetErrors = () => {
+    setEmailError("");
+    setPasswordError("");
+    setSignupErrorText("");
+  };
 
   const handleSubmit = async () => {
+    resetErrors();
     if (isInputValidated()) {
-      signupUser({ email, password });
+      signupUser(
+        { email, password },
+        {
+          onError: (error) => {
+            if (error.message === "Request failed with status code 409") {
+              setSignupErrorText("Address already in use.");
+            } else if (
+              error.message === "Request failed with status code 400"
+            ) {
+              setSignupErrorText(
+                "Invalid values. Please check the provided email address and make sure the password is longer than 6 characters."
+              );
+            } else {
+              setSignupErrorText(error.message);
+            }
+          },
+        }
+      );
     }
   };
 
@@ -72,7 +97,7 @@ function SignupForm() {
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
-          error={passwordError.length > 0}
+          error={passwordError.length > 0 || password.length < 6}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -123,9 +148,9 @@ function SignupForm() {
         )}
       </FormControl>
       {isError && (
-        <div className="auth-form-error-message">
-          <span>{error.message}</span>
-        </div>
+        <FormHelperText error className="auth-form-error-message">
+          <span>{signupErrorText}</span>
+        </FormHelperText>
       )}
 
       <LoadingButton
