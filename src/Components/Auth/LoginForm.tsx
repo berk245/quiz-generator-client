@@ -21,19 +21,24 @@ function LoginForm() {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loginErrorText, setLoginErrorText] = useState("");
 
-  const {
-    mutate: loginUser,
-    data,
-    isPending,
-    isError,
-    error,
-    isSuccess,
-  } = useLoginUser();
+  const { mutate: loginUser, isPending, isError } = useLoginUser();
 
   const handleSubmit = () => {
     if (isInputValidated()) {
-      loginUser({ email: email, password: password });
+      loginUser(
+        { email: email, password: password },
+        {
+          onError: (error) => {
+            if (error.message === "Request failed with status code 404") {
+              setLoginErrorText("Incorrect username password combination.");
+            } else {
+              setLoginErrorText(error.message);
+            }
+          },
+        }
+      );
     }
   };
 
@@ -104,6 +109,9 @@ function LoginForm() {
         <FormHelperText error={passwordError.length > 0}>
           {passwordError}
         </FormHelperText>
+        {isError && (
+          <FormHelperText error={true}>{loginErrorText}</FormHelperText>
+        )}
       </FormControl>
 
       <LoadingButton

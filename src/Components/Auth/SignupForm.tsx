@@ -22,12 +22,24 @@ function SignupForm() {
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [signupErrorText, setSignupErrorText] = useState("");
 
-  const { mutate: signupUser, isPending, isError, error } = useSignupUser();
+  const { mutate: signupUser, isPending, isError } = useSignupUser();
 
   const handleSubmit = async () => {
     if (isInputValidated()) {
-      signupUser({ email, password });
+      signupUser(
+        { email, password },
+        {
+          onError: (error) => {
+            if (error.message === "Request failed with status code 409") {
+              setSignupErrorText("Address already in use.");
+            } else {
+              setSignupErrorText(error.message);
+            }
+          },
+        }
+      );
     }
   };
 
@@ -123,9 +135,9 @@ function SignupForm() {
         )}
       </FormControl>
       {isError && (
-        <div className="auth-form-error-message">
-          <span>{error.message}</span>
-        </div>
+        <FormHelperText error className="auth-form-error-message">
+          <span>{signupErrorText}</span>
+        </FormHelperText>
       )}
 
       <LoadingButton
