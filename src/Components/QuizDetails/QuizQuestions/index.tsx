@@ -89,6 +89,12 @@ function QuizQuestionsSection() {
         />
       </QuestionsHeader>
       <QuestionsList questions={filteredQuestions} />
+      {isError && (
+        <Typography variant="subtitle2">
+          There was an error accessing your quizzes: {error.message}. Please try
+          refreshing the page.
+        </Typography>
+      )}
       {questions.length === 0 && (
         <Typography variant="subtitle2">
           You don't have any questions. Click the{" "}

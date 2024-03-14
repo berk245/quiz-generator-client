@@ -5,36 +5,20 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "@mui/material";
 import { BlurOn } from "@mui/icons-material";
 import { SignOut } from "../../Api/auth";
 
-const pages = ["Dashboard", "Quizzes"];
-const settings = ["Logout"];
-
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {

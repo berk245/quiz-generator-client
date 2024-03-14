@@ -14,7 +14,7 @@ import { LoadingBackdrop } from "../../Components/CreateQuiz/Backdrops/LoadingBa
 import { SuccessBackdrop } from "../../Components/CreateQuiz/Backdrops/SuccessBackdrop";
 
 export default function CreateQuiz() {
-  const [activeStep, setActiveStep] = useAtom(activeStepAtom);
+  const [activeStep] = useAtom(activeStepAtom);
   const [stepNames] = useAtom(stepNamesAtom);
   const [newQuizData] = useAtom(newQuizDataAtom);
 

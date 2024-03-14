@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   LinearProgress,
   SelectChangeEvent,
@@ -21,7 +22,7 @@ function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (new-old)");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: serverResponse, isLoading, isError, error } = useGetQuizzes();
+  const { data: serverResponse, isLoading, isError } = useGetQuizzes();
 
   const filteredQuizzes: QuizType[] = serverResponse?.data
     ? serverResponse.data
@@ -36,6 +37,17 @@ function QuizzesView() {
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
+
+  if (isError) {
+    return (
+      <DefaultLayout>
+        <Alert severity="error">
+          There was an error acessing your quizzes. Please try refreshing the
+          page.
+        </Alert>
+      </DefaultLayout>
+    );
+  }
 
   return (
     <DefaultLayout>

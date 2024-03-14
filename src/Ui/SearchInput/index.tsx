@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { InputProps } from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
-import { Cancel, CancelOutlined, SearchOutlined } from "@mui/icons-material";
+import { Cancel, SearchOutlined } from "@mui/icons-material";
 import { InputAdornment } from "@mui/material";
 
 interface SearchInputProps extends InputProps {
