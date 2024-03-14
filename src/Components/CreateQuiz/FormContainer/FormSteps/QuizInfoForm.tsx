@@ -1,6 +1,4 @@
-import * as React from "react";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useAtom } from "jotai";
 import { newQuizDataAtom } from "../../../../Views/CreateQuiz/atoms";

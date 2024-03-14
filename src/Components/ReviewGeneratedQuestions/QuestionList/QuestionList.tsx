@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { generatedQuestionsAtom } from "../../../Views/GenerateQuestions/atoms";
 import { useAtom } from "jotai";
 import { Box } from "@mui/material";

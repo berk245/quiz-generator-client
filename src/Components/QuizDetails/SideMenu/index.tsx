@@ -1,16 +1,9 @@
-import {
-  Grid,
-  Button,
-  Typography,
-  Backdrop,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import { Grid, Button, Typography, CircularProgress } from "@mui/material";
 import { QuizInfoSection } from "./QuizInfoSection";
 import { SourcesList } from "./SourcesList";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteQuiz, useGetQuiz } from "../../../Api/quizzes";
-import { CheckCircleRounded, DeleteOutline } from "@mui/icons-material";
+import { DeleteOutline } from "@mui/icons-material";
 import LoadingBackdrop from "../../../Ui/LoadingBackdrop";
 
 export const InfoSideMenu = () => {
@@ -18,7 +11,7 @@ export const InfoSideMenu = () => {
 
   const { quizId } = useParams();
 
-  const { data: quizInfo, isLoading, isError, error } = useGetQuiz({ quizId });
+  const { data: quizInfo, isLoading, isError } = useGetQuiz({ quizId });
 
   let {
     mutate: deleteQuiz,
@@ -28,7 +21,7 @@ export const InfoSideMenu = () => {
   } = useDeleteQuiz();
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <CircularProgress />;
   }
 
   const handleDelete = () => {
@@ -66,38 +59,47 @@ export const InfoSideMenu = () => {
         flexDirection: "column",
       }}
     >
-      <QuizInfoSection quiz={quizInfo?.quiz} />
-      <SourcesList sources={quizInfo?.sources} />
-      <Button
-        variant="outlined"
-        color="error"
-        title="Delete Quiz"
-        onClick={handleDelete}
-        sx={{
-          width: "100%",
-        }}
-      >
-        <DeleteOutline sx={{ marginRight: "0.5rem" }} />
-        <Typography
-          variant="subtitle2"
-          sx={{
-            display: {
-              xs: "none",
-              lg: "block",
-            },
-            textTransform: "none",
-          }}
-        >
-          Delete Quiz
+      {isError ? (
+        <Typography variant="subtitle2">
+          Something went wrong while accessing your quiz data. Please try
+          refreshing the page.
         </Typography>
-      </Button>
-      <LoadingBackdrop
-        isPending={isPending}
-        isSubmitSuccess={isSuccess}
-        isError={deleteError}
-        successText="Quiz deleted successfully."
-        errorText="An error occured while deleting your quiz."
-      ></LoadingBackdrop>
+      ) : (
+        <>
+          <QuizInfoSection quiz={quizInfo?.quiz} />
+          <SourcesList sources={quizInfo?.sources} />
+          <Button
+            variant="outlined"
+            color="error"
+            title="Delete Quiz"
+            onClick={handleDelete}
+            sx={{
+              width: "100%",
+            }}
+          >
+            <DeleteOutline sx={{ marginRight: "0.5rem" }} />
+            <Typography
+              variant="subtitle2"
+              sx={{
+                display: {
+                  xs: "none",
+                  lg: "block",
+                },
+                textTransform: "none",
+              }}
+            >
+              Delete Quiz
+            </Typography>
+          </Button>
+          <LoadingBackdrop
+            isPending={isPending}
+            isSubmitSuccess={isSuccess}
+            isError={deleteError}
+            successText="Quiz deleted successfully."
+            errorText="An error occured while deleting your quiz."
+          ></LoadingBackdrop>
+        </>
+      )}
     </Grid>
   );
 };

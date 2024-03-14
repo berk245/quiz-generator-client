@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useAtom } from "jotai";
 import { newQuizDataAtom, activeStepAtom } from "../../Views/CreateQuiz/atoms";
-import { isKeywordsValid, isQuizInfoValid, validateStep } from "./validators";
+import { validateStep } from "./validators";
 
 function FormActions({ createQuiz }: { createQuiz: () => void }) {
   const [activeStep, setActiveStep] = useAtom(activeStepAtom);

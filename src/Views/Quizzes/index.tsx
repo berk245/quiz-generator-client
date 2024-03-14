@@ -1,4 +1,10 @@
-import { Button, LinearProgress, SelectChangeEvent } from "@mui/material";
+import {
+  Alert,
+  Button,
+  LinearProgress,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import DefaultLayout from "../../Layouts/DefaultLayout";
 import Flex from "../../Ui/Flex";
 import "./quizzes-view.css";
@@ -16,7 +22,7 @@ function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (new-old)");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: serverResponse, isLoading, isError, error } = useGetQuizzes();
+  const { data: serverResponse, isLoading, isError } = useGetQuizzes();
 
   const filteredQuizzes: QuizType[] = serverResponse?.data
     ? serverResponse.data
@@ -31,6 +37,17 @@ function QuizzesView() {
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
   };
+
+  if (isError) {
+    return (
+      <DefaultLayout>
+        <Alert severity="error">
+          There was an error acessing your quizzes. Please try refreshing the
+          page.
+        </Alert>
+      </DefaultLayout>
+    );
+  }
 
   return (
     <DefaultLayout>
@@ -50,14 +67,12 @@ function QuizzesView() {
               </Button>
             </Link>
           </Flex>
-          <span className="quizzes-view-subtitle">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
-            recusandae non amet sit architecto expedita molestias pariatur quo,
-            perferendis ex, nobis sapiente quasi, aperiam molestiae corporis
-            quisquam nostrum eum! Quo impedit, velit atque vel odit incidunt
-            amet itaque asperiores error quos, earum neque. Expedita sed
-            blanditiis earum velit quo totam.
-          </span>
+          <Typography className="quizzes-view-subtitle" lineHeight={1.5}>
+            Welcome to your Quizzes Dashboard!
+            <br />
+            Here, you can create new quizzes and view the quizzes you've already
+            created. Happy quizzing!
+          </Typography>
         </Flex>
         {isLoading ? (
           <LinearProgress />
@@ -76,6 +91,9 @@ function QuizzesView() {
                 handleSortChange={handleSortChange}
               />
             </Flex>
+            {filteredQuizzes.length === 0 && (
+              <Typography variant="subtitle2">No matching quizzes.</Typography>
+            )}
             <div className="quiz-boxes-container" dir="row">
               {filteredQuizzes.map((quiz) => {
                 return <SingleQuizBox key={quiz.quiz_id} quiz={quiz} />;
