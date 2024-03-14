@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import Cookies from "js-cookie";
 import LoginView from "./Views/Auth/LoginView";
-import Dashboard from "./Views/Dashboard";
 import SignupView from "./Views/Auth/SignupView";
 import QuizzesView from "./Views/Quizzes";
 import QuizDetailsView from "./Views/QuizDetails";
@@ -43,10 +42,8 @@ function App() {
           </Route>
 
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/quizzes/*" element={<QuizzesRoutes />} />
           </Route>
-
           <Route path="/*" element={<NotFoundView />} />
         </Routes>
       </Router>

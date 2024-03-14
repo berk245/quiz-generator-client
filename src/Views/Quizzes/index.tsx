@@ -1,4 +1,9 @@
-import { Button, LinearProgress, SelectChangeEvent } from "@mui/material";
+import {
+  Button,
+  LinearProgress,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import DefaultLayout from "../../Layouts/DefaultLayout";
 import Flex from "../../Ui/Flex";
 import "./quizzes-view.css";
@@ -50,14 +55,12 @@ function QuizzesView() {
               </Button>
             </Link>
           </Flex>
-          <span className="quizzes-view-subtitle">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
-            recusandae non amet sit architecto expedita molestias pariatur quo,
-            perferendis ex, nobis sapiente quasi, aperiam molestiae corporis
-            quisquam nostrum eum! Quo impedit, velit atque vel odit incidunt
-            amet itaque asperiores error quos, earum neque. Expedita sed
-            blanditiis earum velit quo totam.
-          </span>
+          <Typography className="quizzes-view-subtitle" lineHeight={1.5}>
+            Welcome to your Quizzes Dashboard!
+            <br />
+            Here, you can create new quizzes and view the quizzes you've already
+            created. Happy quizzing!
+          </Typography>
         </Flex>
         {isLoading ? (
           <LinearProgress />
@@ -76,6 +79,15 @@ function QuizzesView() {
                 handleSortChange={handleSortChange}
               />
             </Flex>
+            {serverResponse.data.length === 0 && (
+              <Typography variant="subtitle2">
+                You don't have any quizzes. Click the{" "}
+                <strong>Create a New Quiz</strong> button to get started.
+              </Typography>
+            )}
+            {filteredQuizzes.length === 0 && (
+              <Typography variant="subtitle2">No matching quizzes.</Typography>
+            )}
             <div className="quiz-boxes-container" dir="row">
               {filteredQuizzes.map((quiz) => {
                 return <SingleQuizBox key={quiz.quiz_id} quiz={quiz} />;
