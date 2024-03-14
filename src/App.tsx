@@ -24,7 +24,7 @@ const ProtectedRoute = () => {
 };
 
 const PublicRoute = () => {
-  if (isUserSignedIn) return <Navigate to="/dashboard" replace />;
+  if (isUserSignedIn) return <Navigate to="/quizzes" replace />;
   return <Outlet />;
 };
 
