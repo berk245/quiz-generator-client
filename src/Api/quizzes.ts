@@ -82,3 +82,19 @@ export const useGetQuiz = (props: GetQuizFnProps) => {
     queryFn: () => GetQuizFn(props.quizId),
   });
 };
+
+export const DeleteQuizFn = async (quizId: string) => {
+  if (!quizId) return;
+  const res = await axios.delete(
+    process.env.REACT_APP_SERVER_URL + `/quiz?quiz_id=${quizId}`,
+    reqOptions
+  );
+  return res.data.data;
+};
+
+export const useDeleteQuiz = () => {
+  return useMutation({
+    mutationKey: ["deleteQuiz"],
+    mutationFn: DeleteQuizFn,
+  });
+};
