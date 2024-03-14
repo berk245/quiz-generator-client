@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 import { reqOptions } from "./constants";
 
 export const GetQuizzesFn = async () => {

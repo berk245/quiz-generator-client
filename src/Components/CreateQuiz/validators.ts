@@ -21,7 +21,7 @@ export const validateStep = (step: number, newQuizData: CreateQuizType) => {
   }
 };
 
-export const isQuizInfoValid = (newQuiz: CreateQuizType) => {
+const isQuizInfoValid = (newQuiz: CreateQuizType) => {
   let isStepValid = true;
   let errorMessage = "";
   if (!newQuiz.quizTitle) {
@@ -40,7 +40,7 @@ export const isQuizInfoValid = (newQuiz: CreateQuizType) => {
   return { isStepValid, errorMessage };
 };
 
-export const isFileUploadValid = (newQuiz: CreateQuizType) => {
+const isFileUploadValid = (newQuiz: CreateQuizType) => {
   let isStepValid = true;
   let errorMessage = "";
   if (!newQuiz.files.length) {
@@ -50,7 +50,7 @@ export const isFileUploadValid = (newQuiz: CreateQuizType) => {
   return { isStepValid, errorMessage };
 };
 
-export const isKeywordsValid = (newQuiz: CreateQuizType) => {
+const isKeywordsValid = (newQuiz: CreateQuizType) => {
   let isStepValid = true;
   let errorMessage = "";
   if (newQuiz.description) {
@@ -62,7 +62,7 @@ export const isKeywordsValid = (newQuiz: CreateQuizType) => {
   return { isStepValid, errorMessage };
 };
 
-export const isQuizInstructionsValid = (newQuiz: CreateQuizType) => {
+const isQuizInstructionsValid = (newQuiz: CreateQuizType) => {
   let isStepValid = true;
   let errorMessage = "";
   console.log(newQuiz.metaPrompt.length);

@@ -4,6 +4,7 @@ import { GetApp, AddCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { QuestionType } from "../../../types";
 import { useExportQuestions } from "../../../Api/questions";
+import { LoadingButton } from "@mui/lab";
 
 interface QuestionsHeaderProps extends React.PropsWithChildren {
   questions: QuestionType[];
@@ -72,10 +73,11 @@ export const QuestionsHeader = ({
           gap: "1rem",
         }}
       >
-        <Button
+        <LoadingButton
           variant="outlined"
           title="Export questions to CSV"
           onClick={() => exportToCSV({ questions: formatExportData() })}
+          loading={isPending}
         >
           <GetApp sx={{ marginRight: "0.5rem" }} />
           <Typography
@@ -84,7 +86,7 @@ export const QuestionsHeader = ({
           >
             Export to CSV
           </Typography>
-        </Button>
+        </LoadingButton>
         {children}
       </Grid>
     </Grid>

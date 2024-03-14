@@ -9,7 +9,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {

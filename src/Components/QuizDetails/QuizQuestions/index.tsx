@@ -1,4 +1,9 @@
-import { Grid, LinearProgress, SelectChangeEvent } from "@mui/material";
+import {
+  Grid,
+  LinearProgress,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetQuestions } from "../../../Api/questions";
@@ -56,6 +61,15 @@ function QuizQuestionsSection() {
     );
   }
 
+  if (isError) {
+    return (
+      <Typography variant="subtitle2">
+        There was an error accessing your quizzes: {error.message}. Please try
+        refreshing the page.
+      </Typography>
+    );
+  }
+
   return (
     <Grid
       item
@@ -84,6 +98,15 @@ function QuizQuestionsSection() {
         />
       </QuestionsHeader>
       <QuestionsList questions={filteredQuestions} />
+      {questions.length === 0 && (
+        <Typography variant="subtitle2">
+          You don't have any questions. Click the{" "}
+          <strong>Generate Questions</strong> button to get started.
+        </Typography>
+      )}
+      {questions.length > 0 && filteredQuestions.length === 0 && (
+        <Typography variant="subtitle2">No matching questions.</Typography>
+      )}
     </Grid>
   );
 }

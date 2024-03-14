@@ -33,6 +33,7 @@ export default function KeywordsForm() {
       ...newQuizData,
       keywords: [...keywordTags],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keywordTags]);
 
   return (
