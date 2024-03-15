@@ -29,10 +29,19 @@ interface CreateQuizRequestType {
 const CreateQuizFn = async (props: CreateQuizRequestType) => {
   const formData = new FormData();
 
+  if (!props.quizTitle) {
+    alert("Please provide a name for your quiz.");
+    return;
+  }
+
+  if (props.files[0].size > 19999999) {
+    alert("File size exceeds the limit.");
+    return;
+  }
+
   formData.append("quiz_title", props.quizTitle);
   formData.append("quiz_description", props.description);
   formData.append("keywords", props.keywords.join(","));
-  // To-do: create a loop to append multiple files
   formData.append("source_file", props.files[0]);
   formData.append("meta_prompt", props.metaPrompt);
 

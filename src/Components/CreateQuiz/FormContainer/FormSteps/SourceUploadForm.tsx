@@ -25,6 +25,11 @@ export default function SourceUploadForm() {
   const [newQuizData, setNewQuizData] = useAtom(newQuizDataAtom);
 
   const handleChange = (e: any) => {
+    if (e.target.files[0].size > 19999000) {
+      alert("File exceeds the size limit.");
+      e.target.value = null;
+      return;
+    }
     setNewQuizData({
       ...newQuizData,
       files: [e.target.files[0]],
@@ -45,6 +50,8 @@ export default function SourceUploadForm() {
       <Typography variant="subtitle2" mb={3}>
         Upload a file to generate questions from. Note: The application
         currently supports only <strong>PDF</strong> format.
+        <br />
+        (Max file size: 20MB)
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
