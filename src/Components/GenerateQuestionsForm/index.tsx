@@ -157,6 +157,7 @@ const GenerateQuestionsForm = () => {
         />
 
         <LoadingButton
+          data-testid="loading-btn"
           variant="contained"
           loading={isPending}
           onClick={handleSubmit}

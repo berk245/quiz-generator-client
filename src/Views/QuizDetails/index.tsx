@@ -9,7 +9,7 @@ function QuizDetailsView() {
       <Grid
         container
         sx={{ height: "100%", minWidth: "50rem" }}
-        id="quiz-details-view-container"
+        data-testid="quiz-details-view-container"
       >
         <InfoSideMenu />
         <QuizQuestionsSection />

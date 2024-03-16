@@ -41,7 +41,7 @@ function FormActions({ createQuiz }: { createQuiz: () => void }) {
       </Button>
       <Button
         variant="contained"
-        id="create-quiz-form-action-btn"
+        data-testid="create-quiz-form-action-btn"
         onClick={handleNext}
         sx={{ mt: 3, ml: 1 }}
       >

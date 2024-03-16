@@ -48,7 +48,7 @@ export const QuestionsHeader = ({
           Questions
         </Typography>
         <Link to="generate">
-          <Button variant="contained">
+          <Button variant="contained" data-testid="generate-questions-btn">
             <AddCircle sx={{ marginRight: "0.5rem" }} />
             <Typography
               variant="subtitle2"

@@ -24,7 +24,11 @@ export const QuestionAccordionBox = ({
   };
 
   return (
-    <Accordion disableGutters sx={{ borderBottom: "1px solid silver" }}>
+    <Accordion
+      data-testid="quiz-question"
+      disableGutters
+      sx={{ borderBottom: "1px solid silver" }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMore />}
         aria-controls="panel1-content"

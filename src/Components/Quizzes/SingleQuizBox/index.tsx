@@ -10,7 +10,11 @@ interface SingleQuizBoxProps {
 
 function SingleQuizBox({ quiz }: SingleQuizBoxProps) {
   return (
-    <Link to={`/quizzes/${quiz.quiz_id}`} className="quiz-box">
+    <Link
+      to={`/quizzes/${quiz.quiz_id}`}
+      className="quiz-box"
+      data-testid="quiz-box"
+    >
       <Flex className="quiz-box-text" dir="column">
         <Flex className="quiz-box-title-line flex-items-center">
           <CalculateOutlined />
