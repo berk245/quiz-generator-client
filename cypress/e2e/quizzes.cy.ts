@@ -18,7 +18,7 @@ describe("Quizzes", () => {
   it("should take you to quiz details page when clicked on a quiz box.", () => {
     cy.visit("/quizzes");
 
-    cy.contains(".quiz-box", Cypress.env("existing_test_quiz_name")).as(
+    cy.contains(".quiz-box", Cypress.env("existing_test_quiz_title")).as(
       "specificQuizBox"
     );
 
@@ -44,7 +44,7 @@ describe("A new quiz", () => {
     cy.url().should("include", "/quizzes/new");
 
     //Quiz info section
-    cy.get("#quizTitle").type(Cypress.env("new_quiz_title"));
+    cy.get("#quizTitle").type(Cypress.env("new_test_quiz_title"));
     cy.get("#create-quiz-form-action-btn").click();
 
     // File upload section
@@ -62,5 +62,24 @@ describe("A new quiz", () => {
 
     //Quiz should be created
     cy.get("#quiz-details-view-container", { timeout: 30000 }).should("exist");
+  });
+
+  it("should be deleted successfully", () => {
+    cy.visit("/quizzes");
+
+    cy.contains(".quiz-box", Cypress.env("new_test_quiz_title")).as(
+      "specificQuizBox"
+    );
+
+    // Assert that the specific SingleQuizBox component exists
+    cy.get("@specificQuizBox").should("exist");
+
+    // Click on the specific SingleQuizBox component
+    cy.get("@specificQuizBox").click();
+
+    cy.get("#delete-quiz-btn").click();
+
+    //Delete and redirect successful
+    cy.url().should("contain", "/quizzes");
   });
 });
