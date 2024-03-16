@@ -18,6 +18,7 @@ function ReviewGeneratedQuestions() {
       xs={8}
       sm={9.75}
       padding={"0rem 1rem"}
+      id="review-questions-container"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -75,6 +76,7 @@ const PostReviewLinks = () => {
       >
         <Link to={`/quizzes/${quizId}`}>
           <Button
+            data-testid="back-to-overview-btn"
             onClick={() => setComponentInDisplay("settings")}
             variant="outlined"
             sx={{ textTransform: "none" }}

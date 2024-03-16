@@ -39,7 +39,12 @@ function FormActions({ createQuiz }: { createQuiz: () => void }) {
       >
         Back
       </Button>
-      <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+      <Button
+        variant="contained"
+        data-testid="create-quiz-form-action-btn"
+        onClick={handleNext}
+        sx={{ mt: 3, ml: 1 }}
+      >
         {activeStep === 3 ? "Create Quiz" : "Next"}
       </Button>
     </Box>

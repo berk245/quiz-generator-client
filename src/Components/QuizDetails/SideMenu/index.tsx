@@ -72,6 +72,7 @@ export const InfoSideMenu = () => {
             variant="outlined"
             color="error"
             title="Delete Quiz"
+            id="delete-quiz-btn"
             onClick={handleDelete}
             sx={{
               width: "100%",

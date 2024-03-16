@@ -87,6 +87,7 @@ const QuestionInReview = ({
   };
   return (
     <Accordion
+      data-testid="question-in-review"
       disableGutters
       defaultExpanded
       sx={{ borderBottom: "1px solid silver" }}
@@ -187,6 +188,7 @@ const QuestionInReview = ({
             }}
           >
             <Button
+              data-testid="accept-question-btn"
               variant="outlined"
               color="success"
               onClick={handleSubmit}
@@ -196,6 +198,7 @@ const QuestionInReview = ({
               Add Question To Your Quiz
             </Button>
             <Button
+              data-testid="dismiss-question-btn"
               variant="outlined"
               color="error"
               onClick={handleDismiss}
@@ -254,6 +257,7 @@ const LoadingBackdrop = ({
 }) => {
   return (
     <Backdrop
+      data-testid="loading-backdrop"
       sx={{ color: "#fff", zIndex: 2 }}
       open={isPending || isSubmitSuccess}
     >

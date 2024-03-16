@@ -77,7 +77,7 @@ function LoginForm() {
       onKeyDown={handleKeyDown}
     >
       <TextField
-        id="outlined-basic"
+        data-testid="login-form-email-input"
         label="Email"
         variant="outlined"
         onChange={(e) => setEmail(e.target.value)}
@@ -86,9 +86,9 @@ function LoginForm() {
         required
       />
       <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="login-form-password-input">Password</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
+          data-testid="login-form-password-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
           error={passwordError.length > 0}
@@ -115,6 +115,7 @@ function LoginForm() {
       </FormControl>
 
       <LoadingButton
+        data-testid="login-button"
         variant="contained"
         loading={isPending}
         onClick={handleSubmit}
