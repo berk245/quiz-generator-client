@@ -25,3 +25,4 @@ yarn-error.log*
 
 cypress.env.json
 /cypress/fixtures
+/cypress/screenshots

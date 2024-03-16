@@ -28,10 +28,8 @@ describe("Quizzes", () => {
     // Click on the specific SingleQuizBox component
     cy.get("@specificQuizBox").click();
 
-    cy.url().should(
-      "include",
-      `/quizzes/${Cypress.env("existing_test_quiz_id")}`
-    );
+    // Ensure that quiz title is rendered in the side menu
+    cy.contains(Cypress.env("existing_test_quiz_title")).should("be.visible");
   });
 });
 

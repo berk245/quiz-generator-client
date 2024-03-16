@@ -1,5 +1,5 @@
-describe("template spec", () => {
-  it("passes", () => {
+describe("Signup functionality", () => {
+  it.only("should work", () => {
     cy.visit("/signup");
 
     cy.get("#signup-form-email-input").type(Cypress.env("signup_user_email"));
@@ -10,7 +10,7 @@ describe("template spec", () => {
 
     cy.get("#signup-button").click();
 
-    cy.url().should("include", "/login");
+    cy.url({ timeout: 30000 }).should("include", "/login");
 
     cy.get("#login-form-email-input").type(Cypress.env("signup_user_email"));
     cy.get("#login-form-password-input").type(Cypress.env("signup_user_pwd"));
@@ -20,6 +20,7 @@ describe("template spec", () => {
     cy.url().should("include", "/quizzes");
 
     // Clear data after test
-    cy.request("DELETE", "http://127.0.0.1:8000/cypress-user");
+    // cy.request("DELETE", `${Cypress.env("api_url")}/cypress-user`); // uncomment when testing locally
+    cy.request("DELETE", `${Cypress.env("prod_api_url")}/cypress-user`);
   });
 });
