@@ -84,7 +84,7 @@ function SignupForm() {
       autoComplete="off"
     >
       <TextField
-        id="outlined-basic"
+        id="signup-form-email-input"
         label="Email"
         variant="outlined"
         error={!isValidEmail(email)}
@@ -92,9 +92,9 @@ function SignupForm() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="signup-form-pwd-input">Password</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
+          id="signup-form-pwd-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
           error={passwordError.length > 0 || password.length < 6}
@@ -117,11 +117,11 @@ function SignupForm() {
         </FormHelperText>
       </FormControl>
       <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">
+        <InputLabel htmlFor="signup-form-pwd-repeat-input">
           Repeat Password
         </InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password-repeat"
+          id="signup-form-pwd-repeat-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPasswordRepeat(e.target.value)}
           error={password !== passwordRepeat}
@@ -154,6 +154,7 @@ function SignupForm() {
       )}
 
       <LoadingButton
+        id="signup-button"
         variant="contained"
         loading={isPending}
         onClick={handleSubmit}
