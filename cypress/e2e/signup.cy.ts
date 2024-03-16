@@ -12,7 +12,7 @@ describe("Signup functionality", () => {
       Cypress.env("signup_user_pwd")
     );
 
-    cy.get("#signup-button").click();
+    cy.get('[data-testid="signup-button"]').click();
 
     cy.url({ timeout: 30000 }).should("include", "/login");
 

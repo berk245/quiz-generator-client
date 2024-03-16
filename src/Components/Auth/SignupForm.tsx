@@ -154,7 +154,7 @@ function SignupForm() {
       )}
 
       <LoadingButton
-        id="signup-button"
+        data-testid="signup-button"
         variant="contained"
         loading={isPending}
         onClick={handleSubmit}
