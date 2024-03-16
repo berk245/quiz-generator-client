@@ -84,7 +84,7 @@ function SignupForm() {
       autoComplete="off"
     >
       <TextField
-        id="signup-form-email-input"
+        data-testid="signup-form-email-input"
         label="Email"
         variant="outlined"
         error={!isValidEmail(email)}
@@ -94,7 +94,7 @@ function SignupForm() {
       <FormControl variant="outlined">
         <InputLabel htmlFor="signup-form-pwd-input">Password</InputLabel>
         <OutlinedInput
-          id="signup-form-pwd-input"
+          data-testid="signup-form-pwd-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
           error={passwordError.length > 0 || password.length < 6}
@@ -121,7 +121,7 @@ function SignupForm() {
           Repeat Password
         </InputLabel>
         <OutlinedInput
-          id="signup-form-pwd-repeat-input"
+          data-testid="signup-form-pwd-repeat-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPasswordRepeat(e.target.value)}
           error={password !== passwordRepeat}
