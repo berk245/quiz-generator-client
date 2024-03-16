@@ -6,7 +6,11 @@ import QuizQuestionsSection from "../../Components/QuizDetails/QuizQuestions";
 function QuizDetailsView() {
   return (
     <DefaultLayout>
-      <Grid container sx={{ height: "100%", minWidth: "50rem" }}>
+      <Grid
+        container
+        sx={{ height: "100%", minWidth: "50rem" }}
+        id="quiz-details-view-container"
+      >
         <InfoSideMenu />
         <QuizQuestionsSection />
       </Grid>
