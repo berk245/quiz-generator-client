@@ -95,21 +95,16 @@ function QuizzesView() {
                 handleSortChange={handleSortChange}
               />
             </Flex>
-            {userQuizzes.length === 0 ? (
+            {userQuizzes.length === 0 && (
               <Typography variant="subtitle2">
                 You don't have any quizzes. Click{" "}
                 <strong>Create a New Quiz</strong> button to start.
               </Typography>
-            ) : (
-              <>
-                {filteredQuizzes.length === 0 && (
-                  <Typography variant="subtitle2">
-                    No matching quizzes
-                  </Typography>
-                )}
-              </>
             )}
 
+            {userQuizzes.length > 0 && filteredQuizzes.length === 0 && (
+              <Typography variant="subtitle2">No matching quizzes</Typography>
+            )}
             <div className="quiz-boxes-container" dir="row">
               {filteredQuizzes.map((quiz) => {
                 return <SingleQuizBox key={quiz.quiz_id} quiz={quiz} />;
