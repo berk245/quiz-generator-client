@@ -9,7 +9,7 @@ import DefaultLayout from "../../Layouts/DefaultLayout";
 import Flex from "../../Ui/Flex";
 import "./quizzes-view.css";
 import { AddCircleOutline } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "../../Ui/SearchInput";
 import { SortBySelector } from "../../Components/Quizzes/SortBySelector";
 import SingleQuizBox from "../../Components/Quizzes/SingleQuizBox";
@@ -21,14 +21,18 @@ import { Link } from "react-router-dom";
 function QuizzesView() {
   const [sortBy, setSortBy] = useState("Date (new-old)");
   const [searchTerm, setSearchTerm] = useState("");
+  const [userQuizzes, setUserQuizzes] = useState([]);
 
   const { data: serverResponse, isLoading, isError } = useGetQuizzes();
 
-  const filteredQuizzes: QuizType[] = serverResponse?.data
-    ? serverResponse.data
-        .filter(searchFilter(searchTerm))
-        .sort(sortFilter(sortBy))
-    : [];
+  useEffect(() => {
+    if (!serverResponse) return;
+    setUserQuizzes(serverResponse.data);
+  }, [serverResponse]);
+
+  const filteredQuizzes: QuizType[] = userQuizzes
+    .filter(searchFilter(searchTerm))
+    .sort(sortFilter(sortBy));
 
   const handleSortChange = (e: SelectChangeEvent) => {
     setSortBy(e.target.value);
@@ -91,9 +95,21 @@ function QuizzesView() {
                 handleSortChange={handleSortChange}
               />
             </Flex>
-            {filteredQuizzes.length === 0 && (
-              <Typography variant="subtitle2">No matching quizzes.</Typography>
+            {userQuizzes.length === 0 ? (
+              <Typography variant="subtitle2">
+                You don't have any quizzes. Click{" "}
+                <strong>Create a New Quiz</strong> button to start.
+              </Typography>
+            ) : (
+              <>
+                {filteredQuizzes.length === 0 && (
+                  <Typography variant="subtitle2">
+                    No matching quizzes
+                  </Typography>
+                )}
+              </>
             )}
+
             <div className="quiz-boxes-container" dir="row">
               {filteredQuizzes.map((quiz) => {
                 return <SingleQuizBox key={quiz.quiz_id} quiz={quiz} />;
