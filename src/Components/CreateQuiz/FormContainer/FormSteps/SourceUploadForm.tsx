@@ -34,6 +34,7 @@ export default function SourceUploadForm() {
       ...newQuizData,
       files: [e.target.files[0]],
     });
+    e.target.value = null;
   };
 
   const removeSelectedFile = (file: File) => {
