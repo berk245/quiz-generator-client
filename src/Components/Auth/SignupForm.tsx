@@ -97,7 +97,10 @@ function SignupForm() {
           data-testid="signup-form-pwd-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPassword(e.target.value)}
-          error={passwordError.length > 0 || password.length < 6}
+          error={
+            passwordError.length > 0 ||
+            (0 < password.length && password.length < 6)
+          }
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -124,7 +127,7 @@ function SignupForm() {
           data-testid="signup-form-pwd-repeat-input"
           type={showPassword ? "text" : "password"}
           onChange={(e) => setPasswordRepeat(e.target.value)}
-          error={password !== passwordRepeat}
+          error={passwordRepeat.length > 0 && password !== passwordRepeat}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
