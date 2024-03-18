@@ -16,6 +16,14 @@ export const QuestionsHeader = ({
 }: QuestionsHeaderProps) => {
   const { mutate: exportToCSV, isPending } = useExportQuestions();
 
+  const handleExport = () => {
+    if (!questions.length) {
+      alert("You do not have any questions in your quiz.");
+      return;
+    }
+    exportToCSV({ questions: formatExportData() });
+  };
+
   const formatExportData = () => {
     return questions.map((question) => {
       const { question_text, correct_answer, multiple_choices } = question;
@@ -76,7 +84,7 @@ export const QuestionsHeader = ({
         <LoadingButton
           variant="outlined"
           title="Export questions to CSV"
-          onClick={() => exportToCSV({ questions: formatExportData() })}
+          onClick={handleExport}
           loading={isPending}
         >
           <GetApp sx={{ marginRight: "0.5rem" }} />

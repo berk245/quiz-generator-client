@@ -18,7 +18,6 @@ import {
   componentInDisplayAtom,
   generatedQuestionsAtom,
 } from "../../Views/GenerateQuestions/atoms";
-import { LoadingButton } from "@mui/lab";
 import {
   GenerateQuestionSettingsProps,
   useGenerateQuestions,
