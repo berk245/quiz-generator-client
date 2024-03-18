@@ -53,18 +53,7 @@ function LoginForm() {
     if (!email.length || !isValidEmail(email)) {
       isValid = false;
       setEmailError("Please provide a valid email address.");
-    } else if (email.length > 254) {
-      isValid = false;
-      setEmailError("This email is longer than accepted values.");
     }
-    if (password.length < 6) {
-      isValid = false;
-      setPasswordError("Password should be at least 6 characters long.");
-    } else if (password.length > 60) {
-      isValid = false;
-      setPasswordError("Password is too long.");
-    }
-
     return isValid;
   };
 

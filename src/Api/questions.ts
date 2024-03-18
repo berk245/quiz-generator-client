@@ -116,10 +116,6 @@ const ExportQuestionsFn = async ({
 }: {
   questions: ExportQuestionType[];
 }) => {
-  if (!questions.length) {
-    alert("No questions");
-    throw new Error();
-  }
   const res = await axios({
     method: "POST",
     url: process.env.REACT_APP_SERVER_URL + "/questions/csv",

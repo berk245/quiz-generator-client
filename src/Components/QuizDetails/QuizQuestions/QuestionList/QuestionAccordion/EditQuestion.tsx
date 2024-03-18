@@ -45,7 +45,9 @@ export const EditQuestion = ({
     return (
       editedQuestionInfo.question_text.length < 1000 &&
       editedQuestionInfo.correct_answer.length < 1000 &&
-      editedQuestionInfo.multiple_choices.length < 1000
+      editedQuestionInfo.multiple_choices.length < 1000 &&
+      +editedQuestionInfo.score <= 5 &&
+      +editedQuestionInfo.score > 0
     );
   };
 
@@ -127,9 +129,12 @@ export const EditQuestion = ({
               id="score"
               onChange={handleInputChange}
               inputProps={{
-                min: 0,
+                min: 1,
                 max: 5,
               }}
+              error={
+                +editedQuestionInfo.score > 5 || +editedQuestionInfo.score < 1
+              }
               sx={{
                 "& .MuiInputBase-input": {
                   height: "1.5rem",
