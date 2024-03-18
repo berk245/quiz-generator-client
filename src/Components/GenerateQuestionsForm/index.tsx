@@ -8,6 +8,8 @@ import {
   SelectChangeEvent,
   TextField,
   Button,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import { useSetAtom } from "jotai";
 import React, { useState } from "react";
@@ -64,7 +66,7 @@ const GenerateQuestionsForm = () => {
 
     return (
       generateSettings.amount > 0 &&
-      generateSettings.amount < 21 &&
+      generateSettings.amount <= 20 &&
       generateSettings.question_type &&
       generateSettings.quiz_id
     );
@@ -153,18 +155,20 @@ const GenerateQuestionsForm = () => {
           value={generateSettings.instructions}
           onChange={handleInputChange}
           error={generateSettings.instructions.length > 1000}
-          helperText={`${generateSettings.instructions.length} / 1000 `}
+          helperText={
+            generateSettings.instructions.length > 950 &&
+            `${generateSettings.instructions.length} / 1000 `
+          }
           sx={{ background: "#fff" }}
         />
 
-        <LoadingButton
+        <Button
           data-testid="loading-btn"
           variant="contained"
-          loading={isPending}
           onClick={handleSubmit}
         >
           Generate Questions
-        </LoadingButton>
+        </Button>
         <Button
           variant="text"
           onClick={() => navigate(`/quizzes/${quizId}`, { replace: true })}
@@ -172,8 +176,17 @@ const GenerateQuestionsForm = () => {
           Go back
         </Button>
       </Box>
+      <LoadingBackdrop isPending={isPending} />
     </Grid>
   );
 };
 
 export default GenerateQuestionsForm;
+
+const LoadingBackdrop = ({ isPending }: { isPending: boolean }) => {
+  return (
+    <Backdrop sx={{ color: "#fff", zIndex: 2 }} open={isPending}>
+      <CircularProgress size={60} thickness={4} sx={{ color: "white" }} />
+    </Backdrop>
+  );
+};
