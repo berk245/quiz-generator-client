@@ -63,8 +63,8 @@ const GenerateQuestionsForm = () => {
     }
 
     return (
-      generateSettings.amount &&
-      generateSettings.amount < 20 &&
+      generateSettings.amount > 0 &&
+      generateSettings.amount < 21 &&
       generateSettings.question_type &&
       generateSettings.quiz_id
     );
@@ -113,7 +113,7 @@ const GenerateQuestionsForm = () => {
           value={generateSettings.amount}
           onChange={handleInputChange}
           sx={{ background: "#fff" }}
-          error={generateSettings.amount > 20}
+          error={generateSettings.amount > 20 || generateSettings.amount <= 0}
           helperText={
             generateSettings.amount > 20
               ? "Maximum 20 questions at a time."
@@ -144,15 +144,16 @@ const GenerateQuestionsForm = () => {
 
         <TextField
           id="instructions"
-          label="Instructions"
+          label="Instructions (Optional)"
           type="text"
           multiline
           minRows={3}
-          placeholder="Provide instructions for question generation. You can specify the difficulty, language style, etc."
+          placeholder="Provide instructions for question generation. You can specify the difficulty, language, style, etc."
           variant="filled"
           value={generateSettings.instructions}
           onChange={handleInputChange}
           error={generateSettings.instructions.length > 1000}
+          helperText={`${generateSettings.instructions.length} / 1000 `}
           sx={{ background: "#fff" }}
         />
 

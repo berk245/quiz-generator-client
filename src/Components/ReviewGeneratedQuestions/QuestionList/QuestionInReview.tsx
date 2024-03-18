@@ -55,9 +55,7 @@ const QuestionInReview = ({
 
   const handleSubmit = () => {
     if (!isQuestionValid()) {
-      alert(
-        "Question fields exceeds the character limit. Please make them shorter and try again."
-      );
+      alert("Make sure the question inputs are valid.");
       return;
     }
     acceptQuestion(
@@ -82,7 +80,9 @@ const QuestionInReview = ({
     return (
       questionToSubmit.question_text.length < 1000 &&
       questionToSubmit.correct_answer.length < 1000 &&
-      questionToSubmit.multiple_choices.length < 1000
+      questionToSubmit.multiple_choices.length < 1000 &&
+      +questionToSubmit.score <= 5 &&
+      +questionToSubmit.score > 0
     );
   };
   return (
@@ -104,9 +104,7 @@ const QuestionInReview = ({
             gap: "0.5rem",
           }}
         >
-          <Typography fontSize={"0.9rem"}>
-            {questionToSubmit.question_text}
-          </Typography>
+          <Typography fontSize={"0.9rem"}>{question.question_text}</Typography>
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
@@ -170,9 +168,10 @@ const QuestionInReview = ({
               id="score"
               onChange={handleInputChange}
               inputProps={{
-                min: 0, // Set your minimum value
+                min: 1, // Set your minimum value
                 max: 5, // Set your maximum value
               }}
+              error={+questionToSubmit.score > 5 || +questionToSubmit.score < 1}
               sx={{
                 lineHeight: "2rem",
                 fontSize: "0.85rem",
@@ -239,6 +238,7 @@ const InputField = ({
       id={id}
       onChange={onChange}
       error={value.length > 1000}
+      helperText={value.length > 1000 && `${value.length} / 1000`}
       sx={{
         "& .MuiInputBase-input": {
           fontSize: "0.85rem",
