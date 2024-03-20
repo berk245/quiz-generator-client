@@ -32,7 +32,7 @@ export const InfoSideMenu = () => {
     deleteQuiz(quizId, {
       onSuccess: () => {
         setTimeout(() => {
-          navigator("/quizzes");
+          navigator("/dashboard");
           isSuccess = false;
         }, 2000);
       },

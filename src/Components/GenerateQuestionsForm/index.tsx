@@ -170,7 +170,7 @@ const GenerateQuestionsForm = () => {
         </Button>
         <Button
           variant="text"
-          onClick={() => navigate(`/quizzes/${quizId}`, { replace: true })}
+          onClick={() => navigate(`/quiz/${quizId}`, { replace: true })}
         >
           Go back
         </Button>

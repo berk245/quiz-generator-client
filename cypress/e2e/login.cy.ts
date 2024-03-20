@@ -11,6 +11,6 @@ describe("Login", () => {
 
     cy.get('[data-testid="login-button"]').click();
 
-    cy.url().should("include", "/quizzes");
+    cy.url().should("include", "/dashboard");
   });
 });

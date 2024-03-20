@@ -32,7 +32,7 @@ export const SuccessBackdrop = ({ isSuccess }: { isSuccess: boolean }) => {
               details page in a moment.
             </Typography>
             <Typography sx={{ fontSize: "0.8rem" }}>
-              Please click <a href="/quizzes">here</a> if redirection does not
+              Please click <a href="/dashboard">here</a> if redirection does not
               work.
             </Typography>
           </Grid>
