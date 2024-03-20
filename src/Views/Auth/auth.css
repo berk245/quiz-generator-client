@@ -1,11 +1,12 @@
 .auth-view-wrapper {
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
+  width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-width: 150px;
 }
 
 .auth-form-box {
@@ -13,6 +14,7 @@
   flex-direction: column;
   padding: 1rem 0;
   gap: 0.75rem;
+  min-width: 40%;
 }
 
 .auth-form-link-container {
