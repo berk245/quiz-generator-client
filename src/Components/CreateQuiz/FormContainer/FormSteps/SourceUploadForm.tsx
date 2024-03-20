@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useAtom } from "jotai";
 import { newQuizDataAtom } from "../../../../Views/CreateQuiz/atoms";
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { CloudUpload, HighlightOff } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import Flex from "../../../../Ui/Flex";
@@ -49,11 +49,14 @@ export default function SourceUploadForm() {
     <Grid container>
       <FormStepTitle>Upload Source</FormStepTitle>
       <Typography variant="subtitle2" mb={3}>
-        Upload a file to generate questions from. Note: The application
+        Upload a file to generate quiz questions from. Note: The application
         currently supports only <strong>PDF</strong> format.
         <br />
         (Max file size: 20MB)
       </Typography>
+      <Alert severity="warning" sx={{ width: "100%", marginBottom: "1rem" }}>
+        Please do not upload any confidential or sensitive data.
+      </Alert>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <Button
