@@ -25,7 +25,7 @@ export const useLoginUser = () => {
         sameSite: "strict",
       };
       Cookies.set("auth_token", res.user_token, cookieOptions);
-      window.location.replace("/quizzes");
+      window.location.replace("/dashboard");
     },
   });
 };

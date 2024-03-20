@@ -18,7 +18,7 @@ export default function KeywordsForm() {
   const handleOnSubmit = (e: any) => {
     if (inputRef.current) {
       e.preventDefault();
-      setKeywordTags([inputRef.current.value, ...keywordTags]);
+      setKeywordTags([...keywordTags, inputRef.current.value]);
       inputRef.current.value = "";
     }
   };
@@ -41,35 +41,40 @@ export default function KeywordsForm() {
       <FormStepTitle>Keywords and Concepts</FormStepTitle>
       <Typography variant="subtitle2">
         (Optional) Provide keywords and key concepts that you want the quiz
-        generator to pay special attention on.
+        generator to pay special attention to. Press <strong>Enter</strong> to
+        add the keyword to your list.
       </Typography>
       <Grid container spacing={5}>
         <Grid item xs={12} sm={12}>
-          {keywordTags.length > 0 && (
-            <Box
-              maxHeight={"5rem"}
-              overflow={"auto"}
-              sx={{
-                margin: "1rem 0",
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: "0.5rem 0",
-                border: "1px solid #ebebeb",
-                padding: "1rem",
-              }}
-            >
-              {keywordTags.map((tag, index) => {
-                return (
-                  <KeywordTag
-                    tagName={tag}
-                    key={index}
-                    handleTagDelete={handleTagDelete}
-                  />
-                );
-              })}
-            </Box>
-          )}
+          <Box
+            maxHeight={"5rem"}
+            overflow={"auto"}
+            sx={{
+              margin: "1rem 0",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: "0.5rem 0",
+              border: "1px solid #ebebeb",
+              padding: "1rem",
+              borderRadius: "5px",
+            }}
+          >
+            {keywordTags.map((tag, index) => {
+              return (
+                <KeywordTag
+                  tagName={tag}
+                  key={index}
+                  handleTagDelete={handleTagDelete}
+                />
+              );
+            })}
+            {keywordTags.length === 0 && (
+              <Typography fontSize={"0.75rem"}>
+                You don't have any keywords
+              </Typography>
+            )}
+          </Box>
 
           <form onSubmit={handleOnSubmit}>
             <TextField

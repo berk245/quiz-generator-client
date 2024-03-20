@@ -24,7 +24,7 @@ const ProtectedRoute = () => {
 };
 
 const PublicRoute = () => {
-  if (isUserSignedIn) return <Navigate to="/quizzes" replace />;
+  if (isUserSignedIn) return <Navigate to="/dashboard" replace />;
   return <Outlet />;
 };
 
@@ -42,7 +42,8 @@ function App() {
           </Route>
 
           <Route element={<ProtectedRoute />}>
-            <Route path="/quizzes/*" element={<QuizzesRoutes />} />
+            <Route path="/dashboard" element={<QuizzesView />} />
+            <Route path="/quiz/*" element={<QuizzesRoutes />} />
           </Route>
           <Route path="/*" element={<NotFoundView />} />
         </Routes>
@@ -53,7 +54,6 @@ function App() {
 
 const QuizzesRoutes = () => (
   <Routes>
-    <Route index element={<QuizzesView />} />
     <Route path="/new" element={<CreateQuizView />} />
     <Route path="/:quizId" element={<QuizDetailsView />} />
     <Route path="/:quizId/generate" element={<GenerateQuestionsView />} />

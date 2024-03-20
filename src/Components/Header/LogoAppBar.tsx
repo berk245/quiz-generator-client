@@ -9,9 +9,8 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { BlurOn } from "@mui/icons-material";
+import { BlurOn, HomeRounded } from "@mui/icons-material";
 import { SignOut } from "../../Api/auth";
-
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -35,11 +34,19 @@ function ResponsiveAppBar() {
             justifyContent: "space-between",
           }}
         >
+          <IconButton
+            onClick={() => {
+              window.location.replace("/dashboard");
+            }}
+          >
+            <HomeRounded sx={{ color: "white" }} />
+          </IconButton>
+
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/quizzes"
+            href="/dashboard"
             sx={{
               mr: 2,
               display: "flex",
@@ -55,6 +62,7 @@ function ResponsiveAppBar() {
             <BlurOn sx={{ mr: 1, fontSize: "2rem" }} />
             Qgen
           </Typography>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

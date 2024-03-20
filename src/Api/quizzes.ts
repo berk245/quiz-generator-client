@@ -61,7 +61,7 @@ export const useCreateQuiz = () => {
     mutationFn: CreateQuizFn,
     onSuccess: (res) => {
       setTimeout(() => {
-        window.location.replace(`/quizzes/${res.quiz_id}`);
+        window.location.replace(`/quiz/${res.quiz_id}`);
       }, 3000);
     },
     onError: (err) => {

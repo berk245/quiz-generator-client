@@ -74,7 +74,7 @@ const PostReviewLinks = () => {
           gap: "1rem",
         }}
       >
-        <Link to={`/quizzes/${quizId}`}>
+        <Link to={`/quiz/${quizId}`}>
           <Button
             data-testid="back-to-overview-btn"
             onClick={() => setComponentInDisplay("settings")}

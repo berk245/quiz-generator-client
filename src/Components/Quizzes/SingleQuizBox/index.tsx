@@ -11,7 +11,7 @@ interface SingleQuizBoxProps {
 function SingleQuizBox({ quiz }: SingleQuizBoxProps) {
   return (
     <Link
-      to={`/quizzes/${quiz.quiz_id}`}
+      to={`/quiz/${quiz.quiz_id}`}
       className="quiz-box"
       data-testid="quiz-box"
     >

@@ -10,18 +10,18 @@ beforeEach(() => {
 
   cy.get('[data-testid="login-button"]').click();
 
-  cy.url().should("include", `/quizzes`);
+  cy.url().should("include", `/dashboard`);
 });
 
 describe("Quizzes", () => {
   it("are successfully retrieved from the server and displayed in the menu", () => {
-    cy.visit("/quizzes");
+    cy.visit("/dashboard");
 
     cy.get(".quiz-box").should("exist");
   });
 
   it("should take you to quiz details page when clicked on a quiz box.", () => {
-    cy.visit("/quizzes");
+    cy.visit("/dashboard");
 
     cy.contains(".quiz-box", Cypress.env("existing_test_quiz_title")).as(
       "specificQuizBox"
@@ -40,11 +40,11 @@ describe("Quizzes", () => {
 
 describe("A new quiz", () => {
   it("should be created successfully", () => {
-    cy.visit("/quizzes");
+    cy.visit("/dashboard");
 
     cy.get(".quizzes-view-add-new-button").click();
 
-    cy.url().should("include", "/quizzes/new");
+    cy.url().should("include", "/quiz/new");
 
     //Quiz info section
     cy.get("#quizTitle").type(Cypress.env("new_test_quiz_title"));
@@ -70,7 +70,7 @@ describe("A new quiz", () => {
   });
 
   it("should generate questions successfuly", () => {
-    cy.visit("/quizzes");
+    cy.visit("/dashboard");
 
     cy.contains(
       '[data-testid="quiz-box"]',
@@ -114,7 +114,7 @@ describe("A new quiz", () => {
   });
 
   it("should be deleted successfully", () => {
-    cy.visit("/quizzes");
+    cy.visit("/dashboard");
 
     cy.contains(
       '[data-testid="quiz-box"]',
@@ -130,6 +130,6 @@ describe("A new quiz", () => {
     cy.get("#delete-quiz-btn").click();
 
     //Delete and redirect successful
-    cy.url().should("contain", "/quizzes");
+    cy.url().should("contain", "/dashboard");
   });
 });

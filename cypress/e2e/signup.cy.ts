@@ -25,7 +25,7 @@ describe("Signup functionality", () => {
 
     cy.get('[data-testid="login-button"]').click();
 
-    cy.url().should("include", "/quizzes");
+    cy.url().should("include", "/dashboard");
 
     // Clear data after test
     // cy.request("DELETE", `${Cypress.env("api_url")}/cypress-user`); // uncomment when testing locally

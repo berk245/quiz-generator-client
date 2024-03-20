@@ -59,7 +59,7 @@ function QuizzesView() {
         <Flex className="quizzes-view-title-container" dir="column">
           <Flex className="quizzes-view-title-line flex-items-center" dir="row">
             <span className="quizzes-view-main-title">Your Quizzes</span>
-            <Link to="/quizzes/new">
+            <Link to="/quiz/new">
               <Button
                 className="quizzes-view-add-new-button"
                 variant="contained"
