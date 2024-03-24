@@ -118,7 +118,7 @@ const ExportQuestionsFn = async ({
 }) => {
   const res = await axios({
     method: "POST",
-    url: process.env.REACT_APP_SERVER_URL + "/questions/csv",
+    url: process.env.REACT_APP_SERVER_URL + "/questions/export",
     data: JSON.stringify(questions),
     responseType: "blob",
     ...reqOptions,

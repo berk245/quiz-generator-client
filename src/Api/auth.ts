@@ -8,10 +8,13 @@ interface LoginFunctionInterface {
 }
 
 const LoginFunction = async ({ email, password }: LoginFunctionInterface) => {
-  const res = await axios.post(process.env.REACT_APP_SERVER_URL + "/login", {
-    email: email,
-    password: password,
-  });
+  const res = await axios.post(
+    process.env.REACT_APP_SERVER_URL + "/auth/login",
+    {
+      email: email,
+      password: password,
+    }
+  );
   return res.data;
 };
 
@@ -31,10 +34,13 @@ export const useLoginUser = () => {
 };
 
 const SignupFunction = async ({ email, password }: LoginFunctionInterface) => {
-  const res = await axios.post(process.env.REACT_APP_SERVER_URL + "/signup", {
-    email: email,
-    password: password,
-  });
+  const res = await axios.post(
+    process.env.REACT_APP_SERVER_URL + "/auth/signup",
+    {
+      email: email,
+      password: password,
+    }
+  );
   return res.data;
 };
 
