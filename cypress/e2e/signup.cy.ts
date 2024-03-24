@@ -28,7 +28,7 @@ describe("Signup functionality", () => {
     cy.url().should("include", "/dashboard");
 
     // Clear data after test
-    // cy.request("DELETE", `${Cypress.env("api_url")}/cypress-user`); // uncomment when testing locally
-    cy.request("DELETE", `${Cypress.env("prod_api_url")}/cypress-user`);
+    // cy.request("DELETE", `${Cypress.env("api_url")}/auth/cypress-user`); // uncomment when testing locally
+    cy.request("DELETE", `${Cypress.env("prod_api_url")}/auth/cypress-user`);
   });
 });

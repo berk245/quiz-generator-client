@@ -4,7 +4,7 @@ import { reqOptions } from "./constants";
 
 export const GetQuizzesFn = async () => {
   const res = await axios.get(
-    process.env.REACT_APP_SERVER_URL + "/quizzes",
+    process.env.REACT_APP_SERVER_URL + "/quiz/all",
     reqOptions
   );
   return res.data || [];
@@ -47,7 +47,7 @@ const CreateQuizFn = async (props: CreateQuizRequestType) => {
 
   const res = await axios({
     method: "POST",
-    url: process.env.REACT_APP_SERVER_URL + "/quizzes",
+    url: process.env.REACT_APP_SERVER_URL + "/quiz",
     data: formData,
     ...reqOptions,
   });
