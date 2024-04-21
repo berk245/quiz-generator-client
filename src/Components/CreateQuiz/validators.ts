@@ -2,7 +2,7 @@ interface CreateQuizType {
   quizTitle: string;
   description: string;
   keywords: string[];
-  metaPrompt: string;
+  learningObjectives: string;
   files: File[];
 }
 
@@ -13,9 +13,9 @@ export const validateStep = (step: number, newQuizData: CreateQuizType) => {
     case 1:
       return isFileUploadValid(newQuizData);
     case 2:
-      return isKeywordsValid(newQuizData);
+      return isLearningObjectivesValid(newQuizData);
     case 3:
-      return isQuizInstructionsValid(newQuizData);
+      return isKeywordsValid(newQuizData);
     default:
       return { isStepValid: false, errorMessage: "Something went wrong." };
   }
@@ -62,14 +62,14 @@ const isKeywordsValid = (newQuiz: CreateQuizType) => {
   return { isStepValid, errorMessage };
 };
 
-const isQuizInstructionsValid = (newQuiz: CreateQuizType) => {
+const isLearningObjectivesValid = (newQuiz: CreateQuizType) => {
   let isStepValid = true;
   let errorMessage = "";
-  console.log(newQuiz.metaPrompt.length);
-  if (newQuiz.metaPrompt) {
-    if (newQuiz.metaPrompt.length > 1000) {
+  if (newQuiz.learningObjectives) {
+    if (newQuiz.learningObjectives.length > 1000) {
       isStepValid = false;
-      errorMessage = "Quiz instructions cannot be longer than 1000 characters.";
+      errorMessage =
+        "Learning objectives cannot be longer than 1000 characters.";
     }
   }
   return { isStepValid, errorMessage };

@@ -3,8 +3,8 @@ import { atom } from "jotai";
 export const stepNamesAtom = atom([
   "Quiz Info",
   "Sources",
+  "Learning Objectives",
   "Keywords & Concepts",
-  "Quiz Level Instructions",
 ]);
 
 export const activeStepAtom = atom(0);
@@ -13,6 +13,6 @@ export const newQuizDataAtom = atom({
   quizTitle: "",
   description: "",
   keywords: [] as string[],
-  metaPrompt: "",
+  learningObjectives: "",
   files: [] as File[],
 });

@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { activeStepAtom } from "../../../Views/CreateQuiz/atoms";
 import KeywordsForm from "./FormSteps/KeywordsForm";
 import SourceUploadForm from "./FormSteps/SourceUploadForm";
-import QuizInstructionsForm from "./FormSteps/QuizInstructionsForm";
+import LearningObjectivesForm from "./FormSteps/LearningObjectivesForm";
 
 export default function CreateQuizFormContainer() {
   const [activeStep] = useAtom(activeStepAtom);
@@ -16,9 +16,9 @@ export default function CreateQuizFormContainer() {
       case 1:
         return <SourceUploadForm />;
       case 2:
-        return <KeywordsForm />;
+        return <LearningObjectivesForm />;
       case 3:
-        return <QuizInstructionsForm />;
+        return <KeywordsForm />;
       default:
         throw new Error("Unknown step");
     }
