@@ -43,7 +43,7 @@ const CreateQuizFn = async (props: CreateQuizRequestType) => {
   formData.append("quiz_description", props.description);
   formData.append("keywords", props.keywords.join(","));
   formData.append("source_file", props.files[0]);
-  formData.append("meta_prompt", props.learningObjectives);
+  formData.append("learning_objectives", props.learningObjectives);
 
   const res = await axios({
     method: "POST",
