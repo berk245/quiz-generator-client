@@ -6,38 +6,39 @@ import { useAtom } from "jotai";
 import { newQuizDataAtom } from "../../../../Views/CreateQuiz/atoms";
 import FormStepTitle from "./FormStepTitle";
 
-export default function QuizInstructionsForm() {
+export default function LearningObjectivesForm() {
   const [newQuizData, setNewQuizData] = useAtom(newQuizDataAtom);
 
   const handleChange = (e: any) => {
     setNewQuizData({
       ...newQuizData,
-      metaPrompt: e.target.value,
+      learningObjectives: e.target.value,
     });
   };
 
   return (
     <Grid container>
-      <FormStepTitle>Quiz Level Instructions</FormStepTitle>
+      <FormStepTitle>Learning Objectives</FormStepTitle>
 
       <Grid item gap={3}>
         <Typography variant="subtitle2">
-          Enhance your quiz with personalized touches! Share any special
-          instructions or preferences for question generation that apply to
-          every question.
+          Please enter the primary learning objectives that reflect the main
+          content of your provided text. These objectives will guide the
+          creation of quiz questions to assess understanding and retention of
+          these key concepts.
         </Typography>
         <Grid item xs={12} sm={12} mt={4}>
           <TextField
             required
-            id="metaPrompt"
+            id="learningObjectives"
             multiline
             size="small"
-            name="Quiz metaPrompt Input"
-            placeholder="Example: Create questions suitable for high school students familiar with programming concepts but new to the language. Emphasize syntax and programming language quirks over fundamental concepts."
+            name="Learning Objectives"
+            placeholder="Example learning objective: Understand the basic principles of supply and demand and how they influence market prices."
             fullWidth
-            error={newQuizData.metaPrompt.length > 1000}
+            error={newQuizData.learningObjectives.length > 1000}
             variant="standard"
-            value={newQuizData.metaPrompt}
+            value={newQuizData.learningObjectives}
             onChange={handleChange}
             sx={{ fontSize: "0.75rem" }}
           />

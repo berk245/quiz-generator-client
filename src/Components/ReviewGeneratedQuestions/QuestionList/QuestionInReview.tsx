@@ -126,12 +126,6 @@ const QuestionInReview = ({
               id="question_text"
               onChange={handleInputChange}
             />
-            <InputField
-              value={questionToSubmit.correct_answer}
-              label="Correct Answer"
-              id="correct_answer"
-              onChange={handleInputChange}
-            />
             {questionToSubmit.question_type === "multi" && (
               <InputField
                 value={questionToSubmit.multiple_choices}
@@ -140,6 +134,14 @@ const QuestionInReview = ({
                 onChange={handleInputChange}
               />
             )}
+
+            <InputField
+              value={questionToSubmit.correct_answer}
+              label="Correct Answer"
+              id="correct_answer"
+              onChange={handleInputChange}
+            />
+
             <FormControl variant="outlined">
               <InputLabel id="question-difficulty-selector">
                 Difficulty
@@ -147,7 +149,7 @@ const QuestionInReview = ({
               <Select
                 labelId="question-difficulty-selector"
                 name="difficulty"
-                value={questionToSubmit.difficulty ?? ""}
+                value={questionToSubmit.difficulty.toLocaleLowerCase() ?? ""}
                 onChange={handleSelectChange}
                 size="small"
                 sx={{ fontSize: "0.9rem" }}

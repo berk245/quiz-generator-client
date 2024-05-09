@@ -11,8 +11,8 @@ export const QuizInfoSection = ({ quiz }: { quiz: QuizType }) => {
       title: "Quiz Description",
       val: quiz.quiz_description,
     },
+    { title: "Learning Objectives", val: quiz.learning_objectives },
     { title: "Keywords", val: quiz.keywords },
-    { title: "Quiz Level Instructions", val: quiz.meta_prompt },
   ];
 
   return (
