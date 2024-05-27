@@ -85,6 +85,12 @@ const QuestionInReview = ({
       +questionToSubmit.score > 0
     );
   };
+  const formatDistractors = (distractors: string) => {
+    return distractors
+      .replace(", B) ", "\nB) ")
+      .replace(", C) ", "\nC) ")
+      .replace(", D) ", "\nD) ");
+  };
   return (
     <Accordion
       data-testid="question-in-review"
@@ -103,9 +109,7 @@ const QuestionInReview = ({
             alignItems: "center",
             gap: "0.5rem",
           }}
-        >
-          <Typography fontSize={"0.9rem"}>{question.question_text}</Typography>
-        </Grid>
+        ></Grid>
       </AccordionSummary>
       <AccordionDetails>
         <Grid
@@ -125,13 +129,15 @@ const QuestionInReview = ({
               label="Question"
               id="question_text"
               onChange={handleInputChange}
+              multi={true}
             />
             {questionToSubmit.question_type === "multi" && (
               <InputField
-                value={questionToSubmit.multiple_choices}
+                value={formatDistractors(questionToSubmit.multiple_choices)}
                 label="Multiple Choices"
                 id="multiple_choices"
                 onChange={handleInputChange}
+                multi={true}
               />
             )}
 
@@ -226,10 +232,12 @@ const InputField = ({
   id,
   label,
   onChange,
+  multi = false,
 }: {
   value: string;
   label: string;
   id: string;
+  multi?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
@@ -241,6 +249,7 @@ const InputField = ({
       onChange={onChange}
       error={value.length > 1000}
       helperText={value.length > 1000 && `${value.length} / 1000`}
+      multiline={multi}
       sx={{
         "& .MuiInputBase-input": {
           fontSize: "0.85rem",
