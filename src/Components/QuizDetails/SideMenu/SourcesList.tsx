@@ -20,7 +20,7 @@ export const SourcesList = ({ sources }: { sources: ResponseSourceType[] }) => {
         overflow: "auto",
       }}
     >
-      <strong>Sources</strong>
+      <strong>Teaching Material</strong>
 
       {sources.map((source, index) => {
         return (

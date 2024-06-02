@@ -57,6 +57,8 @@ export const InfoSideMenu = () => {
         gap: "0.5rem",
         overflow: "hidden",
         flexDirection: "column",
+        lineHeight: "2",
+        fontSize: "0.85rem",
       }}
     >
       {isError ? (
@@ -65,11 +67,18 @@ export const InfoSideMenu = () => {
           refreshing the page.
         </Typography>
       ) : (
-        <>
+        <Grid
+          direction="column"
+          sx={{
+            display: "flex",
+            height: "100%",
+            justifyContent: "space-around",
+          }}
+        >
           <QuizInfoSection quiz={quizInfo?.quiz} />
           <SourcesList sources={quizInfo?.sources} />
-          <Button
-            variant="outlined"
+          {/* <Button
+            variant="text"
             color="error"
             title="Delete Quiz"
             id="delete-quiz-btn"
@@ -91,7 +100,7 @@ export const InfoSideMenu = () => {
             >
               Delete Quiz
             </Typography>
-          </Button>
+          </Button> */}
           <LoadingBackdrop
             isPending={isPending}
             isSubmitSuccess={isSuccess}
@@ -99,7 +108,7 @@ export const InfoSideMenu = () => {
             successText="Quiz deleted successfully."
             errorText="An error occured while deleting your quiz."
           ></LoadingBackdrop>
-        </>
+        </Grid>
       )}
     </Grid>
   );

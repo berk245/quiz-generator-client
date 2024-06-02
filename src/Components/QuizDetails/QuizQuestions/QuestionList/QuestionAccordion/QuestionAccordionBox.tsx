@@ -43,20 +43,6 @@ export const QuestionAccordionBox = ({
             minHeight: "2.5rem",
           }}
         >
-          <Grid
-            sm={5}
-            lg={3}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              gap: "0.25rem",
-            }}
-          >
-            <ScoreChip score={question.score} />
-            <DifficultyChip difficulty={question.difficulty} />
-            <QuestionTypeChip question_type={question.question_type} />
-          </Grid>
           <Grid sm>
             <Typography fontSize={"0.9rem"}>
               {question.question_text}{" "}

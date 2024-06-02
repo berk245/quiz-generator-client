@@ -51,6 +51,13 @@ export const EditQuestion = ({
     );
   };
 
+  const formatDistractors = (distractors: string) => {
+    return distractors
+      .replace(", B) ", "\nB) ")
+      .replace(", C) ", "\nC) ")
+      .replace(", D) ", "\nD) ");
+  };
+
   const handleSubmit = () => {
     if (!isQuestionValid()) {
       alert(
@@ -92,7 +99,8 @@ export const EditQuestion = ({
             />
             {question.question_type === "multi" && (
               <InputField
-                value={editedQuestionInfo.multiple_choices}
+                multi={true}
+                value={formatDistractors(editedQuestionInfo.multiple_choices)}
                 label="Multiple Choices"
                 id="multiple_choices"
                 onChange={handleInputChange}
@@ -162,11 +170,13 @@ const InputField = ({
   value,
   id,
   label,
+  multi = false,
   onChange,
 }: {
   value: string;
   label: string;
   id: string;
+  multi?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
@@ -177,6 +187,7 @@ const InputField = ({
       id={id}
       onChange={onChange}
       error={value.length > 1000}
+      multiline={multi}
       sx={{
         "& .MuiInputBase-input": {
           height: "1.5rem",

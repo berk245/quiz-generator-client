@@ -28,7 +28,7 @@ export const QuizInfoSection = ({ quiz }: { quiz: QuizType }) => {
               gap: "0.25rem",
               fontSize: "0.9rem",
               padding: "0.25rem 0.25rem 0.25rem 0",
-              lineHeight: "1.5",
+              lineHeight: "1.75",
             }}
           >
             <strong>{title}</strong>
