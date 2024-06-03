@@ -8,9 +8,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { EditQuestion } from "./EditQuestion";
 import { QuestionDetails } from "./QuestionDetails";
-import { QuestionTypeChip } from "./QuestionTypeChip";
-import { DifficultyChip } from "./DifficultyChip";
-import { ScoreChip } from "./ScoreChip";
 
 export const QuestionAccordionBox = ({
   question,

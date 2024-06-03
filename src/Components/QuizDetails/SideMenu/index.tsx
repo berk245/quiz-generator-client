@@ -1,20 +1,21 @@
-import { Grid, Button, Typography, CircularProgress } from "@mui/material";
+import { Grid, Typography, CircularProgress } from "@mui/material";
 import { QuizInfoSection } from "./QuizInfoSection";
 import { SourcesList } from "./SourcesList";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDeleteQuiz, useGetQuiz } from "../../../Api/quizzes";
-import { DeleteOutline } from "@mui/icons-material";
 import LoadingBackdrop from "../../../Ui/LoadingBackdrop";
 
+// import { DeleteOutline } from "@mui/icons-material";
+
 export const InfoSideMenu = () => {
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
 
   const { quizId } = useParams();
 
   const { data: quizInfo, isLoading, isError } = useGetQuiz({ quizId });
 
   let {
-    mutate: deleteQuiz,
+    // mutate: deleteQuiz,
     isPending,
     isSuccess,
     isError: deleteError,
@@ -24,25 +25,25 @@ export const InfoSideMenu = () => {
     return <CircularProgress />;
   }
 
-  const handleDelete = () => {
-    const isDeleteConfirmed = window.confirm(
-      "This action will delete the quiz and all the related data. Are you sure? "
-    );
-    if (!isDeleteConfirmed || !quizId) return;
-    deleteQuiz(quizId, {
-      onSuccess: () => {
-        setTimeout(() => {
-          navigator("/dashboard");
-          isSuccess = false;
-        }, 2000);
-      },
-      onError: () => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      },
-    });
-  };
+  // const handleDelete = () => {
+  //   const isDeleteConfirmed = window.confirm(
+  //     "This action will delete the quiz and all the related data. Are you sure? "
+  //   );
+  //   if (!isDeleteConfirmed || !quizId) return;
+  //   deleteQuiz(quizId, {
+  //     onSuccess: () => {
+  //       setTimeout(() => {
+  //         navigator("/dashboard");
+  //         isSuccess = false;
+  //       }, 2000);
+  //     },
+  //     onError: () => {
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 2000);
+  //     },
+  //   });
+  // };
 
   return (
     <Grid
